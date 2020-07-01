@@ -40,7 +40,7 @@ namespace AI_3._0.Factories
         }
         public IRouletteWheel CreateRouletteWheel(Solution[] generation)
         {
-            return new RouletteWheel(generation)
+            return new RouletteWheel(generation);
         }
         public ISolutionUtils CreateSolutionUtils()
         {

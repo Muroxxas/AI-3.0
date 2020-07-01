@@ -8,14 +8,15 @@ namespace AI_3._0.Facade
 {
     class GeneratorFacade
     {
+
+
+
         public void Generate(int population, int generations, int cityCount, double mutationRate, int seed)
         {
             GeneratorUtils generatorUtils = new GeneratorUtils(population, cityCount, generations, mutationRate, seed);
-
-
         }
 
-        GeneratorFacade() { }
+        public GeneratorFacade() { }
         
     }
 }
