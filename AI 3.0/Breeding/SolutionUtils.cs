@@ -72,16 +72,21 @@ namespace AI_3._0.Breeding
 
         public double CalcTotalScore(Solution[] generation)
         {
-            double totalScore;
+            double totalScore=0;
 
+            foreach(Solution solution in generation)
+            {
+                totalScore += solution.score;
+            }
             return totalScore;
         }
 
         public double CalcRouletteEdge(double lowerEdge, double score, double totalScore)
         {
-            double rouletteEdge;
+            double sliceSize = score / totalScore;
+            double upperEdge = lowerEdge + sliceSize;
 
-            return rouletteEdge;
+            return upperEdge;
 
         }
     }
