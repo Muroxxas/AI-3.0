@@ -11,5 +11,7 @@ namespace AI_3._0.Interfaces
         ICityFactory CreateCityFactory();
 
         ISolutionFactory CreateSolutionFactory();
+
+        IBreedingFactory CreateBreedingFactory();
     }
 }

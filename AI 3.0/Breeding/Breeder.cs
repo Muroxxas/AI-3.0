@@ -13,6 +13,7 @@ namespace AI_3._0.Breeding
         ISolutionUtils solutionUtils;
         IMutater mutater;
         IRouletteWheel rouletteWheel;
+        ISolutionFactory solutionFactory;
         
         //facade for the private breed
         public Solution Breed()
@@ -39,6 +40,14 @@ namespace AI_3._0.Breeding
             this.rouletteWheel = rouletteWheel;
             this.solutionUtils = solutionUtils;
             this.mutater = mutater;
+        }
+
+        public Breeder(IRouletteWheel rouletteWheel, ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory)
+        {
+            this.rouletteWheel = rouletteWheel;
+            this.solutionUtils = solutionUtils;
+            this.mutater = mutater;
+            this.solutionFactory = solutionFactory;
         }
     }
 }

@@ -51,10 +51,12 @@
     <Compile Include="Facade\GeneratorFacade.cs" />
     <Compile Include="Facade\GeneratorUtils.cs" />
     <Compile Include="Factories\AbstractFactory.cs" />
+    <Compile Include="Factories\BreedingFactory.cs" />
     <Compile Include="Factories\CityFactory.cs" />
     <Compile Include="Factories\SolutionFactory.cs" />
     <Compile Include="Interfaces\IAbstractFactory.cs" />
     <Compile Include="Interfaces\IBreeder.cs" />
+    <Compile Include="Interfaces\IBreedingFactory.cs" />
     <Compile Include="Interfaces\ICityFactory.cs" />
     <Compile Include="Interfaces\IGeneratorUtils.cs" />
     <Compile Include="Interfaces\IMutater.cs" />

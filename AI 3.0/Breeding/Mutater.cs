@@ -17,6 +17,7 @@ namespace AI_3._0.Breeding
             return solution;
         }
 
+        public Mutater() { }
         public Mutater(double mutationRate)
         {
             this.mutationRate = mutationRate;

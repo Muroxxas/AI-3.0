@@ -27,7 +27,7 @@ namespace AI_3._0.Facade
             IRouletteWheel rouletteWheel = new RouletteWheel(Generation);
             ISolutionUtils solutionUtils = new SolutionUtils();
             IMutater mutater = new Mutater(mutationRate);
-            this.breeder = new Breeder(rouletteWheel);
+            this.breeder = new Breeder(rouletteWheel, solutionUtils, mutater, abstractFactory.CreateSolutionFactory());
         }
 
 

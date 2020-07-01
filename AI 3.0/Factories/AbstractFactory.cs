@@ -20,5 +20,9 @@ namespace AI_3._0.Factories
         {
             return new SolutionFactory();
         }
+        public IBreedingFactory CreateBreedingFactory()
+        {
+            return new BreedingFactory();
+        }
     }
 }

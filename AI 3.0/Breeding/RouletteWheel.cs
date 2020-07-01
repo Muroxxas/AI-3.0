@@ -7,7 +7,7 @@ using AI_3._0.Interfaces;
 using AI_3._0.Data_Classes;
 namespace AI_3._0.Breeding
 {
-    class RouletteWheel
+    class RouletteWheel : IRouletteWheel
     {
         Solution[] generation;
 
@@ -19,6 +19,8 @@ namespace AI_3._0.Breeding
             return Parent;
         }
 
+
+        public RouletteWheel() { }
         public RouletteWheel(Solution[] generation)
         {
             this.generation = generation;
