@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Breeding\Breeder.cs" />
+    <Compile Include="Breeding\Mutater.cs" />
     <Compile Include="Breeding\RouletteWheel.cs" />
     <Compile Include="Breeding\SolutionUtils.cs" />
     <Compile Include="Data Classes\City.cs" />

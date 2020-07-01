@@ -20,16 +20,25 @@ namespace AI_3._0.Breeding
             Solution Parent1 = rouletteWheel.SelectParent();
             Solution Parent2 = rouletteWheel.SelectParent();
 
-            return Breed(Parent1, Parent2);
-
             //Note : add some class that checks for and prevents incest.
+
+            return Breed(Parent1, Parent2);
         }
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
             Solution child;
 
+            //TBI
 
+            mutater.Mutate(child);
             return child;
+        }
+
+        public Breeder(IRouletteWheel rouletteWheel, ISolutionUtils solutionUtils, IMutater mutater)
+        {
+            this.rouletteWheel = rouletteWheel;
+            this.solutionUtils = solutionUtils;
+            this.mutater = mutater;
         }
     }
 }

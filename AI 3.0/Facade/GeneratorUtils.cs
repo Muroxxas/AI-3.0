@@ -23,7 +23,11 @@ namespace AI_3._0.Facade
             this.cityCount = cityCount;
             this.generations = generations;
             this.mutationRate = mutationRate;
-            this.breeder = new Breeder();
+
+            IRouletteWheel rouletteWheel = new RouletteWheel(Generation);
+            ISolutionUtils solutionUtils = new SolutionUtils();
+            IMutater mutater = new Mutater(mutationRate);
+            this.breeder = new Breeder(rouletteWheel);
         }
 
 
