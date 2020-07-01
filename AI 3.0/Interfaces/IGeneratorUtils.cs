@@ -8,10 +8,11 @@ namespace AI_3._0.Interfaces
 {
     interface IGeneratorUtils
     {
-        City[] CreateCities(int cityCount);
+        void CreateCities();
 
-        Solution[] CreateRandomSolutions(int population);
+        void CreateInitialGeneration();
 
+        void Generate();
 
 
     }

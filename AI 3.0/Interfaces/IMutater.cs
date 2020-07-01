@@ -8,6 +8,6 @@ namespace AI_3._0.Interfaces
 {
     interface IMutater
     {
-        Solution Mutate(Solution Solution);
+        void Mutate(Solution Solution);
     }
 }

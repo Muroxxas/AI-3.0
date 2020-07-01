@@ -11,7 +11,7 @@ namespace AI_3._0.Breeding
     {
         double mutationRate;
 
-        public Solution Mutate(Solution solution)
+        public void Mutate(Solution solution)
         {
             Random rand = new Random();
             if (rand.NextDouble() <= mutationRate)
@@ -41,7 +41,6 @@ namespace AI_3._0.Breeding
                 }
                 solution.path = mutatedPath;
             }
-            return solution;
         }
 
         public Mutater() { }

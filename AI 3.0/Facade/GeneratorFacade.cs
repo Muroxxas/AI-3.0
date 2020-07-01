@@ -14,6 +14,13 @@ namespace AI_3._0.Facade
         public void Generate(int population, int generations, int cityCount, double mutationRate, int seed)
         {
             GeneratorUtils generatorUtils = new GeneratorUtils(population, cityCount, generations, mutationRate, seed);
+
+            generatorUtils.CreateInitialGeneration();
+
+            for(int i=1; i <= generations; i++)
+            {
+                generatorUtils.Generate();
+            }
         }
 
         public GeneratorFacade() { }

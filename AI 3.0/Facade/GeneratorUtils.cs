@@ -9,7 +9,7 @@ using AI_3._0.Factories;
 using AI_3._0.Data_Classes;
 namespace AI_3._0.Facade
 {
-    class GeneratorUtils
+    class GeneratorUtils : IGeneratorUtils
     {
         IAbstractFactory abstractFactory;
         IBreeder breeder;
@@ -56,7 +56,7 @@ namespace AI_3._0.Facade
             Random rand = new Random();
             string[] solution = new string[population + 1];
 
-            for (int i =0; i < population; i++)
+            for (int i =0; i <= population; i++)
             {
                 //create pseudorandom solution object, append to initialGeneration
                 for (int city =0; city <= cityCount; city++)
@@ -81,6 +81,16 @@ namespace AI_3._0.Facade
             }
 
             this.generation = initialGeneration;
+        }
+
+        public void Generate()
+        {
+            Solution[] newGeneration = new Solution[population];
+            for (int i =0; i <= population; i++)
+            {
+                newGeneration[i] = breeder.Breed();
+            }
+            generation = newGeneration;
         }
 
         public GeneratorUtils(int population, int cityCount, int generations, double mutationRate, int seed)
