@@ -9,7 +9,7 @@ namespace AI_3._0.Interfaces
     interface ISolutionUtils
     {
 
-        double CalcScore(String[] solution);
+        double CalcScore(Solution solution, double totalDistance);
 
         double CalcTotalScore(Solution[] generation);
 

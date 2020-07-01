@@ -8,7 +8,7 @@ namespace AI_3._0.Data_Classes
 {
     class Solution
     {
-        public String[] solution { get; set; }
+        public String[] path { get; set; }
 
         public double distance { get; set; }
 
@@ -18,7 +18,7 @@ namespace AI_3._0.Data_Classes
 
         public Solution(String[] solution)
         {
-            this.solution = solution;
+            this.path = solution;
         }
 
         public Solution() { }

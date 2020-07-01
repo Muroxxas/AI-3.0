@@ -33,21 +33,21 @@ namespace AI_3._0.Breeding
         }
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
-            string[] childSolution = new string[Parent1.solution.Length];
+            string[] childSolution = new string[Parent1.path.Length];
 
             Random rand = new Random();
-            int crossoverPoint = rand.Next(0, Parent1.solution.Length);
+            int crossoverPoint = rand.Next(0, Parent1.path.Length);
 
             //up to and including the crossoverpoint
             for( int i=0; i<=crossoverPoint; i++)
             {
-                childSolution[i] = Parent1.solution[i];
+                childSolution[i] = Parent1.path[i];
             }
 
             //from crossover point to the end of the other parent.
-            for (int j = crossoverPoint+1; j <=Parent1.solution.Length; j++)
+            for (int j = crossoverPoint+1; j <=Parent1.path.Length; j++)
             {
-                childSolution[j] = Parent2.solution[j];
+                childSolution[j] = Parent2.path[j];
             }
 
             Solution child = solutionFactory.CreateSolution(childSolution);
