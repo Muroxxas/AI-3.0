@@ -47,12 +47,15 @@
     <Compile Include="Breeding\SolutionUtils.cs" />
     <Compile Include="Data Classes\City.cs" />
     <Compile Include="Data Classes\Solution.cs" />
+    <Compile Include="Facade\GeneratorFacade.cs" />
+    <Compile Include="Facade\GeneratorUtils.cs" />
     <Compile Include="Factories\AbstractFactory.cs" />
     <Compile Include="Factories\CityFactory.cs" />
     <Compile Include="Factories\SolutionFactory.cs" />
     <Compile Include="Interfaces\IAbstractFactory.cs" />
     <Compile Include="Interfaces\IBreeder.cs" />
     <Compile Include="Interfaces\ICityFactory.cs" />
+    <Compile Include="Interfaces\IGeneratorUtils.cs" />
     <Compile Include="Interfaces\IMutater.cs" />
     <Compile Include="Interfaces\IRouletteWheel.cs" />
     <Compile Include="Interfaces\ISolutionFactory.cs" />
@@ -63,8 +66,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Facade\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
