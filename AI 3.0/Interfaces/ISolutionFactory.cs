@@ -10,5 +10,6 @@ namespace AI_3._0.Interfaces
     {
 
         Solution CreateSolution(string[] solution);
+        Solution CreateSolution();
     }
 }

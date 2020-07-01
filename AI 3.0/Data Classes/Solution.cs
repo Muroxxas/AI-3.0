@@ -19,7 +19,9 @@ namespace AI_3._0.Data_Classes
         public Solution(String[] solution)
         {
             this.solution = solution;
-        } 
+        }
+
+        public Solution() { }
 
     }
 }

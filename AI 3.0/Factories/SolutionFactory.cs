@@ -14,5 +14,10 @@ namespace AI_3._0.Factories
         {
             return new Solution(solution);
         }
+
+        public Solution CreateSolution()
+        {
+            return new Solution();
+        }
     }
 }

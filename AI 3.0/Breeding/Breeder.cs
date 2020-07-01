@@ -18,16 +18,39 @@ namespace AI_3._0.Breeding
         //facade for the private breed
         public Solution Breed()
         {
-            Solution Parent1 = rouletteWheel.SelectParent();
-            Solution Parent2 = rouletteWheel.SelectParent();
 
-            //Note : add some class that checks for and prevents incest.
+            Solution parent1 = solutionFactory.CreateSolution();
+            Solution parent2 = solutionFactory.CreateSolution();
 
-            return Breed(Parent1, Parent2);
+            while (parent1 == parent2)
+            {
+                parent1 = rouletteWheel.SelectParent();
+                parent2 = rouletteWheel.SelectParent();
+            }
+
+
+            return Breed(parent1, parent2);
         }
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
-            Solution child;
+            string[] childSolution = new string[Parent1.solution.Length];
+
+            Random rand = new Random();
+            int crossoverPoint = rand.Next(0, Parent1.solution.Length);
+
+            //up to and including the crossoverpoint
+            for( int i=0; i<=crossoverPoint; i++)
+            {
+                childSolution[i] = Parent1.solution[i];
+            }
+
+            //from crossover point to the end of the other parent.
+            for (int j = crossoverPoint+1; j <=Parent1.solution.Length; j++)
+            {
+                childSolution[j] = Parent2.solution[j];
+            }
+
+            Solution child = solutionFactory.CreateSolution(childSolution);
 
             //TBI
 
