@@ -47,7 +47,7 @@ namespace AI_3._0.UI
 
                 Console.WriteLine();
                 Console.WriteLine($"Do you wish to proceed? [Y/N]");
-                if(Console.ReadLine() == "n" || Console.ReadLine() == "N")
+                if(Console.ReadLine() == "y" || Console.ReadLine() == "Y")
                 {
                     confirm = true;
                 }
