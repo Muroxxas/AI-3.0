@@ -13,10 +13,9 @@ namespace AI_3._0.Breeding
 
         public Solution SelectParent()
         {
-            Solution Parent;
-            //TBI
-
-            return Parent;
+            Random rand = new Random();
+            Solution parent = generation[rand.Next(0, generation.Length + 1)];
+            return parent;
         }
 
 
