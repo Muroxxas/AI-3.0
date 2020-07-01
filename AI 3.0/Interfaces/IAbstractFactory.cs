@@ -9,7 +9,6 @@ namespace AI_3._0.Interfaces
     interface IAbstractFactory
     {
         ICityFactory CreateCityFactory();
-
         ISolutionFactory CreateSolutionFactory();
 
         IBreedingFactory CreateBreedingFactory();

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AI_3._0.Interfaces;
 using AI_3._0.Breeding;
+using AI_3._0.Factories
 namespace AI_3._0.Facade
 {
     class GeneratorUtils
@@ -24,10 +25,15 @@ namespace AI_3._0.Facade
             this.generations = generations;
             this.mutationRate = mutationRate;
 
-            IRouletteWheel rouletteWheel = new RouletteWheel(Generation);
-            ISolutionUtils solutionUtils = new SolutionUtils();
-            IMutater mutater = new Mutater(mutationRate);
-            this.breeder = new Breeder(rouletteWheel, solutionUtils, mutater, abstractFactory.CreateSolutionFactory());
+            this.abstractFactory = new AbstractFactory();
+            IBreedingFactory breedingFactory= abstractFactory.CreateBreedingFactory();
+
+            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel();
+            ISolutionUtils solutionUtils = breedingFactory.CreateSolutionUtils();
+            IMutater mutater = breedingFactory.CreateMutater();
+            ISolutionFactory solutionFactory = abstractFactory.CreateSolutionFactory();
+
+            this.breeder = new Breeder(rouletteWheel, solutionUtils, mutater, solutionFactory);
         }
 
 
