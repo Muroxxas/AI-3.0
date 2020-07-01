@@ -10,10 +10,10 @@ namespace AI_3._0.Factories
     class AbstractFactory : IAbstractFactory
     {
 
-        public ICityFactory CreateCityFactory()
+        public ICityFactory CreateCityFactory(int seed)
         {
 
-            return new CityFactory();
+            return new CityFactory(seed);
         }
 
         public ISolutionFactory CreateSolutionFactory()

@@ -9,13 +9,18 @@ namespace AI_3._0.Factories
 {
     class CityFactory : ICityFactory
     {
+        Random fixRand;
         public City CreateCity(string name)
         {
-            int xCord=0;
-            int yCord=0;
-            // generate random values based off a seed given in main.
+            int xCord=fixRand.Next(0,999);
+            int yCord=fixRand.Next(0,999);
 
             return new City(xCord, yCord, name);
+        }
+
+        public CityFactory(int seed)
+        {
+            fixRand = new Random(seed);
         }
     }
 }
