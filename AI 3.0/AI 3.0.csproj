@@ -42,11 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Classes\City.cs" />
+    <Compile Include="Data Classes\Solution.cs" />
+    <Compile Include="Factories\AbstractFactory.cs" />
+    <Compile Include="Factories\CityFactory.cs" />
+    <Compile Include="Factories\SolutionFactory.cs" />
+    <Compile Include="Interfaces\IAbstractFactory.cs" />
+    <Compile Include="Interfaces\ICityFactory.cs" />
+    <Compile Include="Interfaces\ISolutionFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Breeding\" />
+    <Folder Include="Facade\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
