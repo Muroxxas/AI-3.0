@@ -10,6 +10,7 @@ namespace AI_3._0.Factories
     class CityFactory : ICityFactory
     {
         Random fixRand;
+
         public City CreateCity(string name)
         {
             int xCord=fixRand.Next(0,999);
@@ -17,7 +18,6 @@ namespace AI_3._0.Factories
 
             return new City(xCord, yCord, name);
         }
-
         public CityFactory(int seed)
         {
             fixRand = new Random(seed);

@@ -14,6 +14,8 @@ namespace AI_3._0.Facade
         IAbstractFactory abstractFactory;
         IBreeder breeder;
         ICityFactory cityFactory;
+        ISolutionFactory solutionFactory;
+
         int population;
         int cityCount;
         int generations;
@@ -30,19 +32,18 @@ namespace AI_3._0.Facade
 
             for (int city =0; city < cityCount; city++)
             {
-                sb.Append("0");
                 if (city < 10)
                 {
-                    sb.Append( city.ToString()) ;
+                    sb.Append( $"0{city.ToString()}") ;
                     City newCity = cityFactory.CreateCity(sb.ToString());
-                    Cities[city] = newCity;
+                    cities[city] = newCity;
                     sb.Clear();
                 } else
                 {
-                    sb.Clear();
                     sb.Append(city.ToString());
                     City newCity = cityFactory.CreateCity(sb.ToString());
-                    Cities[city] = newCity;
+                    cities[city] = newCity;
+                    sb.Clear();
 
                 }
             }
@@ -50,9 +51,34 @@ namespace AI_3._0.Facade
         }
         public void CreateInitialGeneration()
         {
-            Solution[] initialGeneration;
+            Solution[] initialGeneration = new Solution[population];
+            StringBuilder sb = new StringBuilder();
+            Random rand = new Random();
+            string[] solution = new string[population + 1];
 
+            for (int i =0; i < population; i++)
+            {
+                //create pseudorandom solution object, append to initialGeneration
+                for (int city =0; city <= cityCount; city++)
+                {
+                    solution = new string[cityCount + 1];
+                    int cityVisited = rand.Next(0, cityCount);
+                    if (cityVisited < 10)
+                    {
+                        sb.Append($"0{city.ToString()}");
+                        solution[city] = sb.ToString();
+                        sb.Clear();
+                    }
+                    else {
+                        sb.Append(city.ToString());
+                        solution[city] = sb.ToString();
+                        sb.Clear();
+                    }
 
+                    Solution solutionObj = solutionFactory.CreateSolution(solution);
+                    initialGeneration[i] = solutionObj;
+                }
+            }
 
             this.generation = initialGeneration;
         }
@@ -74,6 +100,7 @@ namespace AI_3._0.Facade
             ISolutionUtils solutionUtils = breedingFactory.CreateSolutionUtils();
             IMutater mutater = breedingFactory.CreateMutater();
             ISolutionFactory solutionFactory = abstractFactory.CreateSolutionFactory();
+            this.solutionFactory = solutionFactory;
 
             this.breeder = new Breeder(rouletteWheel, solutionUtils, mutater, solutionFactory);
             
