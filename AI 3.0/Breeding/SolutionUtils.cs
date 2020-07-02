@@ -50,13 +50,13 @@ namespace AI_3._0.Breeding
         {
             string[] path = solution.path;
             bool[] cityAlreadyVisited = new bool[path.Length];
-            double Score = solution.distance / totalDistance;
+            double grossScore = solution.distance / totalDistance;
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
             if (firstCityVisited != lastCityVisited)
             {
-                Score = Score * .3;
+                grossScore = grossScore * .3;
             }
 
             foreach (string city in path)
@@ -75,7 +75,7 @@ namespace AI_3._0.Breeding
                         if (cityAlreadyVisited[first] == true)
                         {
                             //The first city in the full path has alreayd been visited. Dupe.
-                            Score = Score * .6;
+                            grossScore = grossScore * .6;
                         }
                         else
                         {
@@ -87,7 +87,7 @@ namespace AI_3._0.Breeding
                         {
                             /* The salesman has already visited what should have been the final city in the middle of the route.
                                Therefore, there is a dupe. */
-                            Score = Score * .6;
+                            grossScore = grossScore * .6;
                         }
                         else
                         {
@@ -99,12 +99,13 @@ namespace AI_3._0.Breeding
                 }
                 else
                 {
-                    Score = Score * .6;
+                    //This is the salesman's first visit.
+                    cityAlreadyVisited[cityInt] = true;
                 }
 
             }
 
-            solution.score = Score;
+            solution.score = grossScore;
         }
         private double CalcTotalScore(Solution[] generation, double totalDistance)
         {
@@ -120,7 +121,7 @@ namespace AI_3._0.Breeding
         private void CalcRouletteEdge(Solution previousSolution, Solution currentSolution, double totalScore)
         {
             double sliceSize = currentSolution.score / totalScore;
-            currentSolution.score = previousSolution.score + sliceSize;
+            currentSolution.rouletteEdge = previousSolution.rouletteEdge + sliceSize;
 
         }
         private void CalcAllEdges(Solution[] generation, double totalScore)

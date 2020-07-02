@@ -34,7 +34,7 @@ namespace AI_3._0.Breeding
                     //fill in reverse.
                     mutatedPath[iterator] = reversedPath[iterator];
                 }
-                for (int iterator = mutatePoint2; iterator < solution.path.Length;) 
+                for (int iterator = mutatePoint2; iterator < solution.path.Length; iterator++) 
                 {
                     //fill normally.
                     mutatedPath[iterator] = solution.path[iterator];

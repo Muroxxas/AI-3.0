@@ -10,14 +10,11 @@ namespace AI_3._0.Factories
     class SolutionFactory : ISolutionFactory
     {
 
-        public Solution CreateSolution(string[] solution)
+        public Solution CreateSolution(string[] path)
         {
-            return new Solution(solution);
+            Guid id = Guid.NewGuid();
+            return new Solution(path, id);
         }
 
-        public Solution CreateSolution()
-        {
-            return new Solution();
-        }
     }
 }

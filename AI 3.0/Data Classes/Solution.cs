@@ -8,6 +8,8 @@ namespace AI_3._0.Data_Classes
 {
     class Solution
     {
+
+        public Guid id { get; set; }
         public String[] path { get; set; }
 
         public double distance { get; set; }
@@ -21,7 +23,11 @@ namespace AI_3._0.Data_Classes
             this.path = solution;
         }
 
-        public Solution() { }
+        public Solution(string[] path, Guid id)
+        {
+            this.path = path;
+            this.id = id;
+        }
 
     }
 }

@@ -103,6 +103,7 @@ namespace AI_3._0.Facade
 
             for (int i =0; i <= population; i++)
             {
+                Console.WriteLine($"child {i} created!");
                 newGeneration[i] = breeder.Breed();
             }
             generation = newGeneration;

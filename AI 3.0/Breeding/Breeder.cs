@@ -14,17 +14,18 @@ namespace AI_3._0.Breeding
         IMutater mutater;
         IRouletteWheel rouletteWheel;
         ISolutionFactory solutionFactory;
-        
-        //facade for the private breed
+
         public Solution Breed()
         {
 
             Solution parent1 = rouletteWheel.SelectParent();
             Solution parent2 = rouletteWheel.SelectParent();
 
-            
-            while (parent1.path == parent2.path)
+            int incestCount = 0;
+            while (parent1.id == parent2.id)
             {
+                Console.WriteLine($"Incest prevention event {incestCount}");
+                incestCount++;
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }
