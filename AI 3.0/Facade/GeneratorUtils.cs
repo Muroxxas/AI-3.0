@@ -101,7 +101,7 @@ namespace AI_3._0.Facade
             Solution[] newGeneration = new Solution[population];
 
 
-            for (int i =0; i <= population; i++)
+            for (int i =0; i < population; i++)
             {
                 Console.WriteLine($"child {i} created!");
                 newGeneration[i] = breeder.Breed();
