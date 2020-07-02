@@ -52,7 +52,7 @@ namespace AI_3._0.UI
                     confirm = true;
                 }
             }
-            generator.Generate(population, cityCount, generations, mutationRate, seed);
+            generator.Generate(population, generations, cityCount, mutationRate, seed);
         }
         
 

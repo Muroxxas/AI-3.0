@@ -57,30 +57,33 @@ namespace AI_3._0.Facade
             Solution[] initialGeneration = new Solution[population];
             StringBuilder sb = new StringBuilder();
             Random rand = new Random();
-            string[] solution = new string[population + 1];
+            string[] path = new string[population + 1];
 
+
+            //Create object
             for (int i =0; i < population; i++)
             {
-                //create pseudorandom solution object, append to initialGeneration
-                for (int city =0; city <= cityCount; city++)
+                path = new string[cityCount + 1];
+                // create path string
+                for (int location =0; location <= cityCount; location++)
                 {
-                    solution = new string[cityCount + 1];
                     int cityVisited = rand.Next(0, cityCount);
                     if (cityVisited < 10)
                     {
-                        sb.Append($"0{city.ToString()}");
-                        solution[city] = sb.ToString();
+                        sb.Append($"0{cityVisited.ToString()}");
+                        path[location]= sb.ToString();
                         sb.Clear();
                     }
                     else {
-                        sb.Append(city.ToString());
-                        solution[city] = sb.ToString();
+                        sb.Append(cityVisited.ToString());
+                        path[location] = sb.ToString();
                         sb.Clear();
                     }
 
-                    Solution solutionObj = solutionFactory.CreateSolution(solution);
-                    initialGeneration[i] = solutionObj;
+                    
                 }
+                Solution solutionObj = solutionFactory.CreateSolution(path);
+                initialGeneration[i] = solutionObj;
             }
 
             this.generation = initialGeneration;
@@ -96,6 +99,7 @@ namespace AI_3._0.Facade
                 newGeneration[i] = breeder.Breed();
             }
             generation = newGeneration;
+
         }
 
         public GeneratorUtils(int population, int cityCount, int generations, double mutationRate, int seed)

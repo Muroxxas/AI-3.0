@@ -19,15 +19,16 @@ namespace AI_3._0.Breeding
         public Solution Breed()
         {
 
-            Solution parent1 = solutionFactory.CreateSolution();
-            Solution parent2 = solutionFactory.CreateSolution();
-
+            Solution parent1 = rouletteWheel.SelectParent();
+            Solution parent2 = rouletteWheel.SelectParent();
+            int incestCount = 0;
             while (parent1.path == parent2.path)
             {
+                //Infinite loop with rouletteWheel, it seems.
+                
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }
-
 
             return Breed(parent1, parent2);
         }
