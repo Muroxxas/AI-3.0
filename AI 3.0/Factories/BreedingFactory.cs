@@ -11,9 +11,9 @@ namespace AI_3._0.Factories
     class BreedingFactory : IBreedingFactory
     {
 
-        public IBreeder CreateBreeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory)
+        public IBreeder CreateBreeder( IMutater mutater, ISolutionFactory solutionFactory)
         {
-            return new Breeder(solutionUtils, mutater, solutionFactory);
+            return new Breeder( mutater, solutionFactory);
         }
         public IMutater CreateMutater(double mutationRate)
         {
@@ -27,9 +27,9 @@ namespace AI_3._0.Factories
         {
             return new RouletteWheel(generation);
         }
-        public ISolutionUtils CreateSolutionUtils()
+        public ISolutionUtils CreateSolutionUtils(City[] cities)
         {
-            return new SolutionUtils();
+            return new SolutionUtils(cities);
         }
 
         public BreedingFactory() { }

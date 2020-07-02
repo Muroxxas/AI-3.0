@@ -16,7 +16,6 @@ namespace AI_3._0.Facade
         ICityFactory cityFactory;
         ISolutionFactory solutionFactory;
         IBreedingFactory breedingFactory;
-        
 
         int population;
         int cityCount;
@@ -50,10 +49,12 @@ namespace AI_3._0.Facade
                 }
             }
             this.cities = cities;
+            
         }
         public void CreateInitialGeneration()
         {
             CreateCities();
+            breeder.SetSolutionUtils( breedingFactory.CreateSolutionUtils(cities) );
 
             Solution[] initialGeneration = new Solution[population];
             StringBuilder sb = new StringBuilder();
@@ -116,18 +117,16 @@ namespace AI_3._0.Facade
             this.seed = seed;
 
             this.abstractFactory = new AbstractFactory();
-
             this.cityFactory = abstractFactory.CreateCityFactory(this.seed);
             this.breedingFactory= abstractFactory.CreateBreedingFactory();
-            ISolutionUtils solutionUtils = breedingFactory.CreateSolutionUtils();
-            IMutater mutater = breedingFactory.CreateMutater(mutationRate);
             ISolutionFactory solutionFactory = abstractFactory.CreateSolutionFactory();
+
+            IMutater mutater = breedingFactory.CreateMutater(mutationRate);
             this.solutionFactory = solutionFactory;
 
-            this.breeder = breedingFactory.CreateBreeder(solutionUtils, mutater, solutionFactory);
+            this.breeder = breedingFactory.CreateBreeder( mutater, solutionFactory);
             
         }
-
 
     }
 }

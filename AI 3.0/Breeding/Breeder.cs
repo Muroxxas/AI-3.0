@@ -31,10 +31,6 @@ namespace AI_3._0.Breeding
             }
             return Breed(parent1, parent2);
         }
-        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
-        {
-            this.rouletteWheel = rouletteWheel;
-        }
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
             string[] childSolution = new string[Parent1.path.Length];
@@ -42,7 +38,7 @@ namespace AI_3._0.Breeding
             int crossoverPoint = rand.Next(0, Parent1.path.Length);
 
             //up to the crossover point
-            for( int i=0; i<crossoverPoint; i++)
+            for (int i = 0; i < crossoverPoint; i++)
             {
                 childSolution[i] = Parent1.path[i];
             }
@@ -57,11 +53,19 @@ namespace AI_3._0.Breeding
             return child;
         }
 
-
-        
-        public Breeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory )
+        public void SetSolutionUtils(ISolutionUtils solutionUtils)
         {
             this.solutionUtils = solutionUtils;
+        }
+        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
+        {
+            this.rouletteWheel = rouletteWheel;
+        }
+        
+
+        
+        public Breeder(IMutater mutater, ISolutionFactory solutionFactory )
+        {
             this.mutater = mutater;
             this.solutionFactory = solutionFactory;
         }

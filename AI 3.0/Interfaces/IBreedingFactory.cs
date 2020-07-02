@@ -8,11 +8,11 @@ namespace AI_3._0.Interfaces
 {
     interface IBreedingFactory
     {
-        IBreeder CreateBreeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory);
+        IBreeder CreateBreeder( IMutater mutater, ISolutionFactory solutionFactory);
         IMutater CreateMutater(double mutationRate);
         IRouletteWheel CreateRouletteWheel();
         IRouletteWheel CreateRouletteWheel(Solution[] generation);
-        ISolutionUtils CreateSolutionUtils();
+        ISolutionUtils CreateSolutionUtils(City[] cities);
 
 
     }

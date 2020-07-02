@@ -10,11 +10,5 @@ namespace AI_3._0.Interfaces
     {
 
         void CalcFitness(Solution[] generation);
-
-        void CalcScore(Solution solution, double totalDistance);
-
-        double CalcTotalScore(Solution[] generation);
-
-        void CalcRouletteEdge(double lowerEdge, double score, double totalScore);
     }
 }
