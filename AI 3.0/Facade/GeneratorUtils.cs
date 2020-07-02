@@ -15,6 +15,7 @@ namespace AI_3._0.Facade
         IBreeder breeder;
         ICityFactory cityFactory;
         ISolutionFactory solutionFactory;
+        IBreedingFactory breedingFactory;
 
         int population;
         int cityCount;
@@ -51,12 +52,14 @@ namespace AI_3._0.Facade
         }
         public void CreateInitialGeneration()
         {
+            CreateCities();
+
             Solution[] initialGeneration = new Solution[population];
             StringBuilder sb = new StringBuilder();
             Random rand = new Random();
             string[] solution = new string[population + 1];
 
-            for (int i =0; i <= population; i++)
+            for (int i =0; i < population; i++)
             {
                 //create pseudorandom solution object, append to initialGeneration
                 for (int city =0; city <= cityCount; city++)
@@ -85,6 +88,8 @@ namespace AI_3._0.Facade
 
         public void Generate()
         {
+            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation);
+            breeder.SetRouletteWheel(rouletteWheel);
             Solution[] newGeneration = new Solution[population];
             for (int i =0; i <= population; i++)
             {
@@ -104,15 +109,13 @@ namespace AI_3._0.Facade
             this.abstractFactory = new AbstractFactory();
 
             this.cityFactory = abstractFactory.CreateCityFactory(this.seed);
-            IBreedingFactory breedingFactory= abstractFactory.CreateBreedingFactory();
-
-            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel();
+            this.breedingFactory= abstractFactory.CreateBreedingFactory();
             ISolutionUtils solutionUtils = breedingFactory.CreateSolutionUtils();
-            IMutater mutater = breedingFactory.CreateMutater();
+            IMutater mutater = breedingFactory.CreateMutater(mutationRate);
             ISolutionFactory solutionFactory = abstractFactory.CreateSolutionFactory();
             this.solutionFactory = solutionFactory;
 
-            this.breeder = new Breeder(rouletteWheel, solutionUtils, mutater, solutionFactory);
+            this.breeder = breedingFactory.CreateBreeder(solutionUtils, mutater, solutionFactory);
             
         }
 

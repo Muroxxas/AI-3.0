@@ -10,25 +10,10 @@ namespace AI_3._0.Factories
 {
     class BreedingFactory : IBreedingFactory
     {
-        public IBreeder CreateBreeder()
-        {
-            IRouletteWheel rouletteWheel = CreateRouletteWheel();
-            IMutater mutater = CreateMutater();
-            ISolutionUtils solutionUtils = CreateSolutionUtils();
 
-            return new Breeder(rouletteWheel, solutionUtils, mutater);
-        }
-        public IBreeder CreateBreeder(ISolutionFactory solutionFactory)
+        public IBreeder CreateBreeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory)
         {
-            IRouletteWheel rouletteWheel = CreateRouletteWheel();
-            IMutater mutater = CreateMutater();
-            ISolutionUtils solutionUtils = CreateSolutionUtils();
-
-            return new Breeder(rouletteWheel, solutionUtils, mutater, solutionFactory);
-        }
-        public IMutater CreateMutater()
-        {
-            return new Mutater();
+            return new Breeder(solutionUtils, mutater, solutionFactory);
         }
         public IMutater CreateMutater(double mutationRate)
         {

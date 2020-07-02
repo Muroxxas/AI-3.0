@@ -8,9 +8,7 @@ namespace AI_3._0.Interfaces
 {
     interface IBreedingFactory
     {
-        IBreeder CreateBreeder();
-        IBreeder CreateBreeder(ISolutionFactory solutionFactory);
-        IMutater CreateMutater();
+        IBreeder CreateBreeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory);
         IMutater CreateMutater(double mutationRate);
         IRouletteWheel CreateRouletteWheel();
         IRouletteWheel CreateRouletteWheel(Solution[] generation);

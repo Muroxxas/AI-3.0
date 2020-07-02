@@ -23,7 +23,7 @@ namespace AI_3._0.UI
             bool confirm = false;
             while (confirm == false)
             {
-                Console.WriteLine("PleaseEnter the number of cities the slaesman will visit");
+                Console.WriteLine("Please Enter the number of cities the salesman will visit");
                 cityCount = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("Please Enter the number of solutions per generation");

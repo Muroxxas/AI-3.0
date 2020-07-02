@@ -22,7 +22,7 @@ namespace AI_3._0.Breeding
             Solution parent1 = solutionFactory.CreateSolution();
             Solution parent2 = solutionFactory.CreateSolution();
 
-            while (parent1 == parent2)
+            while (parent1.path == parent2.path)
             {
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
@@ -53,16 +53,13 @@ namespace AI_3._0.Breeding
             return child;
         }
 
-        public Breeder(IRouletteWheel rouletteWheel, ISolutionUtils solutionUtils, IMutater mutater)
-        {
-            this.rouletteWheel = rouletteWheel;
-            this.solutionUtils = solutionUtils;
-            this.mutater = mutater;
-        }
 
-        public Breeder(IRouletteWheel rouletteWheel, ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory)
+        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
         {
             this.rouletteWheel = rouletteWheel;
+        }
+        public Breeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory )
+        {
             this.solutionUtils = solutionUtils;
             this.mutater = mutater;
             this.solutionFactory = solutionFactory;

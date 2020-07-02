@@ -19,9 +19,11 @@ namespace AI_3._0.Facade
 
             for(int i=1; i <= generations; i++)
             {
+
                 generatorUtils.Generate();
             }
         }
+
 
         public GeneratorFacade() { }
         
