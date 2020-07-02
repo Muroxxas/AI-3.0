@@ -96,13 +96,14 @@ namespace AI_3._0.Facade
 
             IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation);
             breeder.SetRouletteWheel(rouletteWheel);
+            breeder.CalcFitness(generation);
 
             Solution[] newGeneration = new Solution[population];
 
 
             for (int i =0; i <= population; i++)
             {
-                newGeneration[i] = breeder.Breed(generation);
+                newGeneration[i] = breeder.Breed();
             }
             generation = newGeneration;
 

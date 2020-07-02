@@ -16,9 +16,8 @@ namespace AI_3._0.Breeding
         ISolutionFactory solutionFactory;
         
         //facade for the private breed
-        public Solution Breed(Solution[] generation)
+        public Solution Breed()
         {
-            solutionUtils.CalcFitness(generation);
 
             Solution parent1 = rouletteWheel.SelectParent();
             Solution parent2 = rouletteWheel.SelectParent();
@@ -31,6 +30,21 @@ namespace AI_3._0.Breeding
             }
             return Breed(parent1, parent2);
         }
+        
+
+        public void CalcFitness(Solution[] generation)
+        {
+            solutionUtils.CalcFitness(generation);
+        }
+        public void SetSolutionUtils(ISolutionUtils solutionUtils)
+        {
+            this.solutionUtils = solutionUtils;
+        }
+        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
+        {
+            this.rouletteWheel = rouletteWheel;
+        }
+
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
             string[] childSolution = new string[Parent1.path.Length];
@@ -53,17 +67,6 @@ namespace AI_3._0.Breeding
             return child;
         }
 
-        public void SetSolutionUtils(ISolutionUtils solutionUtils)
-        {
-            this.solutionUtils = solutionUtils;
-        }
-        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
-        {
-            this.rouletteWheel = rouletteWheel;
-        }
-        
-
-        
         public Breeder(IMutater mutater, ISolutionFactory solutionFactory )
         {
             this.mutater = mutater;
