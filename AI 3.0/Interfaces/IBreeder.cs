@@ -9,7 +9,7 @@ namespace AI_3._0.Interfaces
     interface IBreeder
     {
         void SetRouletteWheel(IRouletteWheel rouletteWheel);
-        Solution Breed();
+        Solution Breed(Solution[] generation);
 
     }
 }

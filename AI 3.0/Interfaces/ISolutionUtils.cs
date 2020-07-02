@@ -9,10 +9,12 @@ namespace AI_3._0.Interfaces
     interface ISolutionUtils
     {
 
-        double CalcScore(Solution solution, double totalDistance);
+        void CalcFitness(Solution[] generation);
+
+        void CalcScore(Solution solution, double totalDistance);
 
         double CalcTotalScore(Solution[] generation);
 
-        double CalcRouletteEdge(double lowerEdge, double score, double totalScore);
+        void CalcRouletteEdge(double lowerEdge, double score, double totalScore);
     }
 }

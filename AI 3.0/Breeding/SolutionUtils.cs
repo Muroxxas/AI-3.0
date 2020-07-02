@@ -9,7 +9,31 @@ namespace AI_3._0.Breeding
 {
     class SolutionUtils : ISolutionUtils
     {
-        public double CalcScore(Solution solution, double totalDistance)
+
+        public CalcFitness(Solution[] generation)
+        {
+
+               double totalDistance = CalcTotalDistance(generation);
+
+        }
+
+        private double calcDistance(Solution solution)
+        {
+            foreach(string cityVisited in solution.path)
+            {
+
+            }
+        }
+        private double CalcTotalDistance(Solution[] generation)
+        {
+            double totalDistance = 0;
+            foreach (Solution solution in generation)
+            {
+                //calcDistance
+                totalDistance += solution.distance;
+            }
+        }
+        public void CalcScore(Solution solution, double totalDistance)
         {
             string[] path = solution.path;
             bool[] cityAlreadyVisited = new bool[path.Length];
@@ -70,6 +94,7 @@ namespace AI_3._0.Breeding
             return Score;
         }
 
+       
         public double CalcTotalScore(Solution[] generation)
         {
             double totalScore=0;
@@ -81,12 +106,10 @@ namespace AI_3._0.Breeding
             return totalScore;
         }
 
-        public double CalcRouletteEdge(double lowerEdge, double score, double totalScore)
+        public void CalcRouletteEdge(double lowerEdge, double score, double totalScore)
         {
             double sliceSize = score / totalScore;
             double upperEdge = lowerEdge + sliceSize;
-
-            return upperEdge;
 
         }
     }

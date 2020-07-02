@@ -16,21 +16,24 @@ namespace AI_3._0.Breeding
         ISolutionFactory solutionFactory;
         
         //facade for the private breed
-        public Solution Breed()
+        public Solution Breed(Solution[] generation)
         {
+            solutionUtils.CalcFitness(generation);
 
             Solution parent1 = rouletteWheel.SelectParent();
             Solution parent2 = rouletteWheel.SelectParent();
-            int incestCount = 0;
+
+            
             while (parent1.path == parent2.path)
             {
-                //Infinite loop with rouletteWheel, it seems.
-                
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }
-
             return Breed(parent1, parent2);
+        }
+        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
+        {
+            this.rouletteWheel = rouletteWheel;
         }
         private Solution Breed(Solution Parent1, Solution Parent2)
         {
@@ -55,10 +58,7 @@ namespace AI_3._0.Breeding
         }
 
 
-        public void SetRouletteWheel(IRouletteWheel rouletteWheel)
-        {
-            this.rouletteWheel = rouletteWheel;
-        }
+        
         public Breeder(ISolutionUtils solutionUtils, IMutater mutater, ISolutionFactory solutionFactory )
         {
             this.solutionUtils = solutionUtils;

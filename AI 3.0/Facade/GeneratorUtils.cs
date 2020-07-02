@@ -16,6 +16,7 @@ namespace AI_3._0.Facade
         ICityFactory cityFactory;
         ISolutionFactory solutionFactory;
         IBreedingFactory breedingFactory;
+        
 
         int population;
         int cityCount;
@@ -91,12 +92,16 @@ namespace AI_3._0.Facade
 
         public void Generate()
         {
+
             IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation);
             breeder.SetRouletteWheel(rouletteWheel);
+
             Solution[] newGeneration = new Solution[population];
+
+
             for (int i =0; i <= population; i++)
             {
-                newGeneration[i] = breeder.Breed();
+                newGeneration[i] = breeder.Breed(generation);
             }
             generation = newGeneration;
 
