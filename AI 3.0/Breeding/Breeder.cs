@@ -21,12 +21,9 @@ namespace AI_3._0.Breeding
             
             Solution parent1 = rouletteWheel.SelectParent();
             Solution parent2 = rouletteWheel.SelectParent();
-
-            //int incestCount = 0;
             while (parent1.id == parent2.id)
             {
-                //Console.WriteLine($"Incest prevention event {incestCount}");
-                //incestCount++;
+
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }

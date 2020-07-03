@@ -105,7 +105,6 @@ namespace AI_3._0.Facade
             {
                 
                 newGeneration[i] = breeder.Breed();
-                Console.WriteLine($"Child {i} added!");
             }
             generation = newGeneration;
 
