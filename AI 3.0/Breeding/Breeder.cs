@@ -27,7 +27,7 @@ namespace AI_3._0.Breeding
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }
-            return Breed(parent1, parent2);
+            return Crossover(parent1, parent2);
         }
         
 
@@ -45,7 +45,7 @@ namespace AI_3._0.Breeding
             this.rouletteWheel.SetRand(new Random());
         }
 
-        private Solution Breed(Solution Parent1, Solution Parent2)
+        private Solution Crossover(Solution Parent1, Solution Parent2)
         {
             string[] childSolution = new string[Parent1.path.Length];
             Random rand = new Random();

@@ -30,7 +30,7 @@ namespace AI_3._0.Breeding
             return BinarySearchRecursive(selection, min, max);
 
         }
-        private Solution BinarySearchRecursive(double selection, int min, int max)
+        private Solution BinarySearchRecursive(int selection, int min, int max)
         {
             mid = (min + max) / 2;
             if (generation[mid].score <= selection && selection < generation[mid + 1].score)

@@ -12,11 +12,11 @@ namespace AI_3._0.Facade
     class GeneratorUtils : IGeneratorUtils
     {
         IAbstractFactory abstractFactory;
-        IBreeder breeder;
         ICityFactory cityFactory;
         ISolutionFactory solutionFactory;
         IBreedingFactory breedingFactory;
 
+        IBreeder breeder;
         int population;
         int cityCount;
         int generations;
