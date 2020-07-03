@@ -10,7 +10,6 @@ namespace AI_3._0.Interfaces
     {
         IBreeder CreateBreeder( IMutater mutater, ISolutionFactory solutionFactory);
         IMutater CreateMutater(double mutationRate);
-        IRouletteWheel CreateRouletteWheel();
         IRouletteWheel CreateRouletteWheel(Solution[] generation);
         ISolutionUtils CreateSolutionUtils(City[] cities);
 

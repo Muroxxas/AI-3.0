@@ -19,10 +19,6 @@ namespace AI_3._0.Factories
         {
             return new Mutater(mutationRate);
         }
-        public IRouletteWheel CreateRouletteWheel()
-        {
-            return new RouletteWheel();
-        }
         public IRouletteWheel CreateRouletteWheel(Solution[] generation)
         {
             return new RouletteWheel(generation);
