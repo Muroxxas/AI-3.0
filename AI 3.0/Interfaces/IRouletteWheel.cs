@@ -9,5 +9,6 @@ namespace AI_3._0.Interfaces
     interface IRouletteWheel
     {
         Solution SelectParent();
+        void SetRand(Random rand);
     }
 }

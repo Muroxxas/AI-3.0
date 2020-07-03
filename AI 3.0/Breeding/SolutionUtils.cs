@@ -14,14 +14,22 @@ namespace AI_3._0.Breeding
 
         public void CalcFitness(Solution[] generation)
         {
-           double totalDistance = CalcTotalDistance(generation);
-           double totalScore = CalcTotalScore(generation, totalDistance);
-           CalcAllEdges(generation, totalScore);     
-        }          
- 
-        private double calcDistance(Solution solution)
+           int totalDistance = CalcTotalDistance(generation);
+           int totalScore = CalcTotalScore(generation,totalDistance); 
+        }
+
+        private int CalcTotalDistance(Solution[] generation)
         {
-            double runningTotal = 0;
+            int totalDistance = 0;
+            foreach (Solution solution in generation)
+            {
+                totalDistance += calcDistance(solution);
+            }
+            return totalDistance;
+        }
+        private int calcDistance(Solution solution)
+        {
+            int runningTotal = 0;
             //Calculates the distance a single solution travels.
             for (int pathSlot = 1; pathSlot < solution.path.Length; pathSlot++)
             {
@@ -36,29 +44,47 @@ namespace AI_3._0.Breeding
             solution.distance = runningTotal;
             return runningTotal;
         }
-        private double CalcTotalDistance(Solution[] generation)
+        private int Pythagoreas(City cityA, City cityB)
         {
-            double totalDistance = 0;
+            int X = Math.Abs(cityA.xCord - cityB.xCord);
+            int Y = Math.Abs(cityA.yCord - cityB.yCord);
+
+            int Z = (int)Math.Sqrt(((X * X) + (Y * Y)));
+            return Z;
+
+        }
+
+        private int CalcTotalScore(Solution[] generation, int totalDistance)
+        {
+            int scoreRunningTotal = 0;
+
             foreach (Solution solution in generation)
             {
-                calcDistance(solution);
-                totalDistance += solution.distance;
+                scoreRunningTotal = CalcScore(solution, scoreRunningTotal, totalDistance);
             }
-            return totalDistance;
+            return scoreRunningTotal;
         }
-        private void CalcScore(Solution solution, double totalDistance)
+        private int CalcScore(Solution solution, int scoreRunningTotal, int totalDistance)
+        {
+            int score = scoreRunningTotal + CalcSlice(solution, totalDistance);
+            solution.score = score;
+            return score;
+            
+        }
+        private int CalcSlice(Solution solution, int totalDistance)
         {
             string[] path = solution.path;
             bool[] cityAlreadyVisited = new bool[path.Length];
-            double grossScore = solution.distance / totalDistance;
+            int slice = totalDistance / solution.distance;
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
             if (firstCityVisited != lastCityVisited)
             {
-                grossScore = grossScore * .3;
+                slice = (int)Math.Round(slice * .3);
             }
 
+            //calculate the final slice size.
             foreach (string city in path)
             {
                 int cityInt = Convert.ToInt32(city);
@@ -75,7 +101,7 @@ namespace AI_3._0.Breeding
                         if (cityAlreadyVisited[first] == true)
                         {
                             //The first city in the full path has alreayd been visited. Dupe.
-                            grossScore = grossScore * .6;
+                            slice = (int)Math.Round(slice * .6);
                         }
                         else
                         {
@@ -87,7 +113,7 @@ namespace AI_3._0.Breeding
                         {
                             /* The salesman has already visited what should have been the final city in the middle of the route.
                                Therefore, there is a dupe. */
-                            grossScore = grossScore * .6;
+                            slice = (int)Math.Round(slice * .6);
                         }
                         else
                         {
@@ -104,44 +130,10 @@ namespace AI_3._0.Breeding
                 }
 
             }
-
-            solution.score = grossScore;
+            return slice;
         }
-        private double CalcTotalScore(Solution[] generation, double totalDistance)
-        {
-            double totalScore = 0;
 
-            foreach (Solution solution in generation)
-            {
-                CalcScore(solution, totalDistance);
-                totalScore += solution.score;
-            }
-            return totalScore;
-        }
-        private void CalcRouletteEdge(Solution previousSolution, Solution currentSolution, double totalScore)
-        {
-            double sliceSize = currentSolution.score / totalScore;
-            currentSolution.rouletteEdge = previousSolution.rouletteEdge + sliceSize;
 
-        }
-        private void CalcAllEdges(Solution[] generation, double totalScore)
-        {
-            generation.First().rouletteEdge = 0;
-            for(int generationSlot =1; generationSlot < generation.Length; generationSlot++)
-            {
-                CalcRouletteEdge(generation[generationSlot - 1], generation[generationSlot], totalScore);
-            }
-
-        }
-        private double Pythagoreas(City cityA, City cityB)
-        {
-            double X = (double)Math.Abs(cityA.xCord - cityB.xCord);
-            double Y = (double)Math.Abs(cityA.yCord - cityB.yCord);
-
-            double Z = Math.Sqrt(((X * X) + (Y * Y)));
-            return Z;
-
-        }
         
 
         public SolutionUtils(City[] cities)

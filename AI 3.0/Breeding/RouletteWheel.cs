@@ -13,32 +13,37 @@ namespace AI_3._0.Breeding
         int min;
         int max;
         int mid;
+        Random rand;
+
         public Solution SelectParent()
         {
-            Random rand = new Random();
-            double selection = rand.NextDouble();
-            if(selection >= generation.Last().rouletteEdge)
+            int selection = rand.Next(0, generation.Last().score);
+            if(selection >= generation.Last().score)
             {
                 return generation.Last();
             }
+            else if (selection < generation.First().score)
+            {
+                return generation.First();
+            }
+
             return BinarySearchRecursive(selection, min, max);
 
         }
-
         private Solution BinarySearchRecursive(double selection, int min, int max)
         {
             mid = (min + max) / 2;
-            if (generation[mid].rouletteEdge <= selection && selection < generation[mid + 1].rouletteEdge)
+            if (generation[mid].score <= selection && selection < generation[mid + 1].score)
             {
-                //parent found!
+                //object found!
                 return generation[mid];
             }
-            else if (selection < generation[mid].rouletteEdge)
+            else if (selection < generation[mid].score)
             {
                 //Go down.
                 return BinarySearchRecursive(selection, min, mid - 1);
             }
-            else if (selection >= generation[mid + 1].rouletteEdge)
+            else if (selection >= generation[mid + 1].score)
             {
                 //Go up.
                 return BinarySearchRecursive(selection, mid + 1, max);
@@ -52,6 +57,12 @@ namespace AI_3._0.Breeding
             }
 
         }
+
+        public void SetRand(Random rand)
+        {
+            this.rand = rand;
+        }
+        
         public RouletteWheel(Solution[] generation)
         {
             this.generation = generation;
