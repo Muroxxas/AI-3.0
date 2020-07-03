@@ -42,11 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BestFit\BestFit.cs" />
+    <Compile Include="BestFit\SortByDifference.cs" />
     <Compile Include="Breeding\Breeder.cs" />
     <Compile Include="Breeding\Mutater.cs" />
     <Compile Include="Breeding\RouletteWheel.cs" />
     <Compile Include="Breeding\SolutionUtils.cs" />
     <Compile Include="Data Classes\City.cs" />
+    <Compile Include="Data Classes\FitnessObject.cs" />
     <Compile Include="Data Classes\Solution.cs" />
     <Compile Include="Facade\GeneratorFacade.cs" />
     <Compile Include="Facade\GeneratorUtils.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="Factories\CityFactory.cs" />
     <Compile Include="Factories\SolutionFactory.cs" />
     <Compile Include="Interfaces\IAbstractFactory.cs" />
+    <Compile Include="Interfaces\IBestFit.cs" />
     <Compile Include="Interfaces\IBreeder.cs" />
     <Compile Include="Interfaces\IBreedingFactory.cs" />
     <Compile Include="Interfaces\ICityFactory.cs" />
