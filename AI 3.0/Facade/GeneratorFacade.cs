@@ -23,7 +23,7 @@ namespace AI_3._0.Facade
                 generatorUtils.Generate();
             }
 
-            Console.WriteLine($"Generation complete!");
+            Console.ReadLine();
         }
 
 
