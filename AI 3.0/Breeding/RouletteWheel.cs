@@ -22,36 +22,31 @@ namespace AI_3._0.Breeding
             {
                 return generation.Last();
             }
-            int Binarycount = 0;
-            Console.WriteLine("New search!");
-            return BinarySearchRecursive(selection, min, max, Binarycount);
-
-        }
-        private Solution BinarySearchRecursive(double selection, int min, int max, int Binarycount)
-        {
-            Binarycount += 1;
-            if(Binarycount > 9)
+            else if (selection < generation.First().score)
             {
-                Console.WriteLine("Problem with Binary search detected!");
-                Console.ReadLine();
+                return generation.First();
             }
 
+            return BinarySearchRecursive(selection, min, max);
+
+        }
+        private Solution BinarySearchRecursive(double selection, int min, int max)
+        {
             mid = (min + max) / 2;
-            Console.WriteLine($"Min : {min} Max : {max} mid : {mid} selection : {selection} ");
             if (generation[mid].score <= selection && selection < generation[mid + 1].score)
             {
-                //parent found!
+                //object found!
                 return generation[mid];
             }
             else if (selection < generation[mid].score)
             {
                 //Go down.
-                return BinarySearchRecursive(selection, min, mid - 1, Binarycount);
+                return BinarySearchRecursive(selection, min, mid - 1);
             }
             else if (selection >= generation[mid + 1].score)
             {
                 //Go up.
-                return BinarySearchRecursive(selection, mid + 1, max, Binarycount);
+                return BinarySearchRecursive(selection, mid + 1, max);
             }
             else
             {
