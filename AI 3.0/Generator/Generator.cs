@@ -103,12 +103,18 @@ namespace AI_3._0.Facade
 
             for (int i =0; i < population; i++)
             {
+                
                 newGeneration[i] = breeder.Breed();
+
             }
             generation = newGeneration;
 
         }
-
+        public void CalcFitness()
+        {
+            //used for setting the fitness of the final generation, after the facade's generation loop finishes.
+            breeder.CalcFitness(generation);
+        }
         public Solution FindBestFit()
         {
             return bestFit.FindBestFit(generation);

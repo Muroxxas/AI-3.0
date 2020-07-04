@@ -11,7 +11,7 @@ namespace AI_3._0.Interfaces
         void CreateCities();
         void CreateInitialGeneration();
         void Generate();
-
+        void CalcFitness();
         Solution FindBestFit();
 
     }

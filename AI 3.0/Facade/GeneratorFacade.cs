@@ -23,12 +23,13 @@ namespace AI_3._0.Facade
                 Console.WriteLine($"Generation {i} created!");
                 generator.Generate();
             }
-
+            generator.CalcFitness();
             Console.ReadLine();
         }
 
         public Solution GetBestFit()
         {
+
             return generator.FindBestFit();
         }
 

@@ -55,8 +55,14 @@ namespace AI_3._0.UI
             }
             generator.Generate(population, generations, cityCount, mutationRate, seed);
             Solution bestFit = generator.GetBestFit();
+            StringBuilder sb = new StringBuilder();
+            foreach (string location in bestFit.path)
+            {
+                sb.Append($"{location} ");
+            }
+
             Console.WriteLine($"The best solution, after {generations} generations, is thus");
-            Console.WriteLine($"PATH     : {bestFit.path}");
+            Console.WriteLine($"PATH     : {sb.ToString()}");
             Console.WriteLine($"DISTANCE : {bestFit.distance}");
             Console.WriteLine($"ID       : {bestFit.id}");
             Console.ReadLine();

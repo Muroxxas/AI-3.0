@@ -25,11 +25,11 @@ namespace AI_3._0.Data_Classes
                 FitnessObject f1 = (FitnessObject)a;
                 FitnessObject f2 = (FitnessObject)b;
 
-                if (f1.fitness < f2.fitness)
+                if (f1.fitness > f2.fitness)
                 {
                     return 1;
                 }
-                else if (f1.fitness > f2.fitness)
+                else if (f1.fitness <  f2.fitness)
                 {
                     return -1;
 
