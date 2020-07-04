@@ -25,7 +25,7 @@ namespace AI_3._0.Factories
         }
         public ISolutionUtils CreateSolutionUtils(City[] cities)
         {
-            return new SolutionUtils(cities);
+            return new TestingSolutionUtils(cities);
         }
 
         public BreedingFactory() { }
