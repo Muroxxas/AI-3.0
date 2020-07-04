@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using AI_3._0.Interfaces;
 using AI_3._0.Data_Classes;
 namespace AI_3._0.Fitness
@@ -22,9 +23,9 @@ namespace AI_3._0.Fitness
             bestFitArray[generation.Count()-1] = new FitnessObject(generation.Length - 1, lastFitness);
 
             FillBestFitArray(generation);
-            Array.Sort(bestFitArray);
+            IEnumerable<FitnessObject> bestFitSorted = bestFitArray.OrderBy(item => item.fitness);
 
-            int slotOfBestFitObject = bestFitArray.Last().generationSlot;
+            int slotOfBestFitObject = bestFitSorted.Last().generationSlot;
             return generation[slotOfBestFitObject];
 
         }
