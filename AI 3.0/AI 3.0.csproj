@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Breeding\TestingSolutionUtils.cs" />
     <Compile Include="Fitness\BestFit.cs" />
     <Compile Include="Breeding\Breeder.cs" />
     <Compile Include="Breeding\Mutater.cs" />

@@ -7,15 +7,15 @@ using AI_3._0.Interfaces;
 using AI_3._0.Data_Classes;
 namespace AI_3._0.Breeding
 {
-    class SolutionUtils : ISolutionUtils
+    class TestingSolutionUtils : ISolutionUtils
     {
 
         City[] cities;
 
         public void CalcFitness(Solution[] generation)
         {
-           int totalDistance = CalcTotalDistance(generation);
-           int totalScore = CalcTotalScore(generation,totalDistance); 
+            int totalDistance = CalcTotalDistance(generation);
+            int totalScore = CalcTotalScore(generation, totalDistance);
         }
 
         private int CalcTotalDistance(Solution[] generation)
@@ -69,85 +69,44 @@ namespace AI_3._0.Breeding
             int score = scoreRunningTotal + CalcSlice(solution, totalDistance);
             solution.score = score;
             return score;
-            
+
         }
         private int CalcSlice(Solution solution, int totalDistance)
         {
             string[] path = solution.path;
-            bool[] cityAlreadyVisited = new bool[path.Length-1];
+            bool[] cityAlreadyVisited = new bool[path.Length - 1];
             int slice = totalDistance / solution.distance;
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
-            //If end's don't match, punish.
+            //If ends dont match, punish.
             if (firstCityVisited != lastCityVisited)
             {
-                slice = (int)Math.Round(slice * .8);
+                slice = (int)Math.Round(slice * .7);
             }
-
-            //calculate the final slice size.
-            foreach (string city in path)
+            for(int slot =0; slot < path.Length; slot++)
             {
-                int cityInt = Convert.ToInt32(city);
+                string city = path[slot];
+                int cityInt = Int32.Parse(city);
 
-                //check if the city is a dupe.
-                if (cityAlreadyVisited[cityInt] == true)
+                //City has NOT appeared before.
+                if (cityAlreadyVisited[cityInt] == false)
                 {
-                    //potential duplicate of the first city on the path. Checking to confirm/deny.
-                    if (city == firstCityVisited)
-                    {
-                        int first = Convert.ToInt32(firstCityVisited);
-                        
-
-                        if (cityAlreadyVisited[first] == true)
-                        {
-                            //The first city in the full path has alreayd been visited. Dupe.
-                            slice = (int)Math.Round(slice * .9);
-                        }
-                        else
-                        {
-                            //The first city hasn't been marked down, so this must be the first iteration of the foreach loop. NOT a dupe.
-                            cityAlreadyVisited[first] = true;
-                        }
-                    }
-                    //potential dupe of the last city on the path. Checking to confirm/deny.
-                    else if (city == lastCityVisited)
-                    {
-                        int last = Convert.ToInt32(lastCityVisited);
-                        if (cityAlreadyVisited[last] == true)
-                        {
-                            /* The salesman has already visited what should have been the final city in the middle of the route.
-                               Therefore, there is a dupe. */
-                            slice = (int)Math.Round(slice * .9);
-                        }
-                        else
-                        {
-                            //This may be the end of the path. Cannot confirm duplicity, but can mark city as visited.
-                            cityAlreadyVisited[last] = true;
-                        }
-                    }     
-                    //for all other cities, it's guaranteed to be a dupe.
-                    else {
-                        slice = (int)Math.Round(slice * .6);
-                    }
-
-                }
-                else
-                {
-                    //This is the salesman's first visit.
                     cityAlreadyVisited[cityInt] = true;
                 }
-
+                //city HAS appeared before.
+                else
+                {
+                    //
+                    if()
+                }
             }
-            return slice;
+
         }
 
-
-        
 
         public SolutionUtils(City[] cities)
         {
             this.cities = cities;
         }
     }
-}
