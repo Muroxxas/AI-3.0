@@ -14,22 +14,22 @@ namespace AI_3._0.Breeding
 
         public void CalcFitness(Solution[] generation)
         {
-           int totalDistance = CalcTotalDistance(generation);
-           int totalScore = CalcTotalScore(generation,totalDistance); 
+           double totalDistance = CalcTotalDistance(generation);
+           double totalScore = CalcTotalScore(generation,totalDistance); 
         }
 
-        private int CalcTotalDistance(Solution[] generation)
+        private double CalcTotalDistance(Solution[] generation)
         {
-            int totalDistance = 0;
+            double totalDistance = 0;
             foreach (Solution solution in generation)
             {
                 totalDistance += calcDistance(solution);
             }
             return totalDistance;
         }
-        private int calcDistance(Solution solution)
+        private double calcDistance(Solution solution)
         {
-            int runningTotal = 0;
+            double runningTotal = 0;
             //Calculates the distance a single solution travels.
             for (int pathSlot = 1; pathSlot < solution.path.Length; pathSlot++)
             {
@@ -44,19 +44,19 @@ namespace AI_3._0.Breeding
             solution.distance = runningTotal;
             return runningTotal;
         }
-        private int Pythagoreas(City cityA, City cityB)
+        private double Pythagoreas(City cityA, City cityB)
         {
-            int X = Math.Abs(cityA.xCord - cityB.xCord);
-            int Y = Math.Abs(cityA.yCord - cityB.yCord);
+            double X = Math.Abs(cityA.xCord - cityB.xCord);
+            double Y = Math.Abs(cityA.yCord - cityB.yCord);
 
-            int Z = (int)Math.Sqrt(((X * X) + (Y * Y)));
+            double Z = (int)Math.Sqrt(((X * X) + (Y * Y)));
             return Z;
 
         }
 
-        private int CalcTotalScore(Solution[] generation, int totalDistance)
+        private double CalcTotalScore(Solution[] generation, double totalDistance)
         {
-            int scoreRunningTotal = 0;
+            double scoreRunningTotal = 0;
 
             foreach (Solution solution in generation)
             {
@@ -64,25 +64,25 @@ namespace AI_3._0.Breeding
             }
             return scoreRunningTotal;
         }
-        private int CalcScore(Solution solution, int scoreRunningTotal, int totalDistance)
+        private double CalcScore(Solution solution, double scoreRunningTotal, double totalDistance)
         {
-            int score = scoreRunningTotal + CalcSlice(solution, totalDistance);
+            double score = scoreRunningTotal + CalcSlice(solution, totalDistance);
             solution.score = score;
             return score;
             
         }
-        private int CalcSlice(Solution solution, int totalDistance)
+        private double CalcSlice(Solution solution, double totalDistance)
         {
             string[] path = solution.path;
             bool[] cityAlreadyVisited = new bool[path.Length-1];
-            int slice = totalDistance / solution.distance;
+            double slice = totalDistance / solution.distance;
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
             //If end's don't match, punish.
             if (firstCityVisited != lastCityVisited)
             {
-                slice = (int)Math.Round(slice * .8);
+                slice = slice * .8;
             }
 
             //calculate the final slice size.
@@ -102,7 +102,7 @@ namespace AI_3._0.Breeding
                         if (cityAlreadyVisited[first] == true)
                         {
                             //The first city in the full path has alreayd been visited. Dupe.
-                            slice = (int)Math.Round(slice * .9);
+                            slice = slice * .9;
                         }
                         else
                         {
@@ -118,7 +118,7 @@ namespace AI_3._0.Breeding
                         {
                             /* The salesman has already visited what should have been the final city in the middle of the route.
                                Therefore, there is a dupe. */
-                            slice = (int)Math.Round(slice * .9);
+                            slice = slice * .9;
                         }
                         else
                         {
@@ -128,7 +128,7 @@ namespace AI_3._0.Breeding
                     }     
                     //for all other cities, it's guaranteed to be a dupe.
                     else {
-                        slice = (int)Math.Round(slice * .6);
+                        slice = slice * .6;
                     }
 
                 }

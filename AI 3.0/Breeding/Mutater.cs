@@ -10,13 +10,12 @@ namespace AI_3._0.Breeding
     class Mutater : IMutater
     {
         double mutationRate;
-
+        Random rand;
         public void Mutate(Solution solution)
         {
-            Random rand = new Random();
             if (rand.NextDouble() <= mutationRate)
             {
-
+                Console.WriteLine("Rolled to mutate!");
                 int mutatePoint1 = rand.Next(0,solution.path.Length);
                 int mutatePoint2 = rand.Next(1, solution.path.Length + 1);
                 string[] mutatedPath = new string[solution.path.Length];
@@ -47,6 +46,7 @@ namespace AI_3._0.Breeding
         public Mutater(double mutationRate)
         {
             this.mutationRate = mutationRate;
+            this.rand = new Random();
         }
     }
 }

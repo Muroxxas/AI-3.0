@@ -14,7 +14,7 @@ namespace AI_3._0.Breeding
         IMutater mutater;
         IRouletteWheel rouletteWheel;
         ISolutionFactory solutionFactory;
-
+        Random rand;
 
         public Solution Breed()
         {
@@ -27,7 +27,9 @@ namespace AI_3._0.Breeding
                 parent1 = rouletteWheel.SelectParent();
                 parent2 = rouletteWheel.SelectParent();
             }
-            return Crossover(parent1, parent2);
+            Solution child = Crossover(parent1, parent2);
+            mutater.Mutate(child);
+            return child;
         }
         
 
@@ -63,7 +65,6 @@ namespace AI_3._0.Breeding
             }
 
             Solution child = solutionFactory.CreateSolution(childSolution);
-            mutater.Mutate(child);
             return child;
         }
 
@@ -71,6 +72,7 @@ namespace AI_3._0.Breeding
         {
             this.mutater = mutater;
             this.solutionFactory = solutionFactory;
+            this.rand = new Random();
         }
     }
 }

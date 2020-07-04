@@ -12,9 +12,9 @@ namespace AI_3._0.Data_Classes
         public Guid id { get; set; }
         public String[] path { get; set; }
 
-        public int distance { get; set; }
+        public double distance { get; set; }
 
-        public int score { get; set; }
+        public double score { get; set; }
 
         public Solution(String[] solution)
         {

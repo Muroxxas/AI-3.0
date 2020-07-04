@@ -17,7 +17,7 @@ namespace AI_3._0.Breeding
 
         public Solution SelectParent()
         {
-            int selection = rand.Next(0, generation.Last().score);
+            double selection = GetRandomDouble(0, generation.Last().score);
             if(selection >= generation.Last().score)
             {
                 return generation.Last();
@@ -30,7 +30,7 @@ namespace AI_3._0.Breeding
             return BinarySearchRecursive(selection, min, max);
 
         }
-        private Solution BinarySearchRecursive(int selection, int min, int max)
+        private Solution BinarySearchRecursive(double selection, int min, int max)
         {
             mid = (min + max) / 2;
             if (generation[mid].score <= selection && selection < generation[mid + 1].score)
@@ -56,6 +56,11 @@ namespace AI_3._0.Breeding
                 return new Solution(fake);
             }
 
+        }
+        private double GetRandomDouble(double minimum, double maximum)
+        {
+            double i = rand.NextDouble() * (maximum - minimum) + minimum;
+            return i;
         }
 
         public void SetRand(Random rand)

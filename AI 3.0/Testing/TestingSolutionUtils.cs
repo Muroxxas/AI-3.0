@@ -14,22 +14,22 @@ namespace AI_3._0.Breeding
 
         public void CalcFitness(Solution[] generation)
         {
-            int totalDistance = CalcTotalDistance(generation);
-            int totalScore = CalcTotalScore(generation, totalDistance);
+            double totalDistance = CalcTotalDistance(generation);
+            double totalScore = CalcTotalScore(generation, totalDistance);
         }
 
-        private int CalcTotalDistance(Solution[] generation)
+        private double CalcTotalDistance(Solution[] generation)
         {
-            int totalDistance = 0;
+            double totalDistance = 0;
             foreach (Solution solution in generation)
             {
                 totalDistance += calcDistance(solution);
             }
             return totalDistance;
         }
-        private int calcDistance(Solution solution)
+        private double calcDistance(Solution solution)
         {
-            int runningTotal = 0;
+            double runningTotal = 0;
             //Calculates the distance a single solution travels.
             for (int pathSlot = 1; pathSlot < solution.path.Length; pathSlot++)
             {
@@ -44,19 +44,19 @@ namespace AI_3._0.Breeding
             solution.distance = runningTotal;
             return runningTotal;
         }
-        private int Pythagoreas(City cityA, City cityB)
+        private double Pythagoreas(City cityA, City cityB)
         {
-            int X = Math.Abs(cityA.xCord - cityB.xCord);
-            int Y = Math.Abs(cityA.yCord - cityB.yCord);
+            double X = Math.Abs(cityA.xCord - cityB.xCord);
+            double Y = Math.Abs(cityA.yCord - cityB.yCord);
 
-            int Z = (int)Math.Sqrt(((X * X) + (Y * Y)));
+            double Z = (int)Math.Sqrt(((X * X) + (Y * Y)));
             return Z;
 
         }
 
-        private int CalcTotalScore(Solution[] generation, int totalDistance)
+        private double CalcTotalScore(Solution[] generation, double totalDistance)
         {
-            int scoreRunningTotal = 0;
+            double scoreRunningTotal = 0;
 
             foreach (Solution solution in generation)
             {
@@ -64,29 +64,29 @@ namespace AI_3._0.Breeding
             }
             return scoreRunningTotal;
         }
-        private int CalcScore(Solution solution, int scoreRunningTotal, int totalDistance)
+        private double CalcScore(Solution solution, double scoreRunningTotal, double totalDistance)
         {
-            int score = scoreRunningTotal + CalcSlice(solution, totalDistance);
+            double score = scoreRunningTotal + CalcSlice(solution, totalDistance);
             solution.score = score;
             return score;
 
         }
-        private int CalcSlice(Solution solution, int totalDistance)
+        private double CalcSlice(Solution solution, double  totalDistance)
         {
             string[] path = solution.path;
             bool[] cityAlreadyVisited = new bool[path.Length - 1];
-            int slice = totalDistance / solution.distance;
+            double slice = totalDistance / solution.distance;
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
             //If ends dont match, punish.
             if (firstCityVisited != lastCityVisited)
             {
-                slice = (int)Math.Round(slice * .7);
+                slice = slice * .7;
             }
 
             //Loop through and search for duplicates.
-            for(int slot =0; slot < path.Length; slot++)
+            for (int slot = 0; slot < path.Length; slot++)
             {
                 string city = path[slot];
                 int cityInt = Int32.Parse(city);
@@ -101,7 +101,7 @@ namespace AI_3._0.Breeding
                 else
                 {
                     //if we found a city that matches the name of the first city in the path
-                    if(city == path.First())
+                    if (city == path.First())
                     {
                         //check if we are currently pointed towards the final object in the path.
                         if (slot == path.Length - 1)
@@ -111,39 +111,42 @@ namespace AI_3._0.Breeding
                         else
                         {
                             //We are NOT currently pointed at the final location in the solution object. Therefore, we are currently pointed at a dupe of path.First.
-                            slice = (int)Math.Round(slice * .7);
+                            slice = slice * .7;
                         }
                     }
 
                     //Found a city that matches path.Last, but does NOT match first.
-                    else if(city == path.Last())
+                    else if (city == path.Last())
                     {
                         //check if we are currently pointed towards the final object in the path.
-                        if(slot == path.Length - 1)
+                        if (slot == path.Length - 1)
                         {
                             // We are currently inspecting the last object, so we cannot confirm if cityVisited[slot] was set to true by first or by a dupe. Do nothing.
                         }
                         else
                         {
                             // we are NOT currently inspecting the last object. Therefore, the last object's cityVisited could only have been set to true by a dupe.
-                            slice = (int)Math.Round(slice * .7);
+                            slice = slice * .7;
                         }
 
                     }
 
                     //Found a location that is not the starting or end point.
-                    else {
+                    else
+                    {
                         //We've already visited here. Dupe.
-                        slice = (int)Math.Round(slice * .7);
+                        slice = slice * .7;
                     }
                 }
             }
 
+            return slice;
         }
 
 
-        public SolutionUtils(City[] cities)
+        public TestingSolutionUtils(City[] cities)
         {
             this.cities = cities;
         }
     }
+}
