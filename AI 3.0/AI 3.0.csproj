@@ -42,17 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BestFit\BestFit.cs" />
-    <Compile Include="BestFit\SortByDifference.cs" />
+    <Compile Include="Fitness\BestFit.cs" />
     <Compile Include="Breeding\Breeder.cs" />
     <Compile Include="Breeding\Mutater.cs" />
     <Compile Include="Breeding\RouletteWheel.cs" />
     <Compile Include="Breeding\SolutionUtils.cs" />
     <Compile Include="Data Classes\City.cs" />
-    <Compile Include="Data Classes\FitnessObject.cs" />
+    <Compile Include="Fitness\FitnessObject.cs" />
     <Compile Include="Data Classes\Solution.cs" />
     <Compile Include="Facade\GeneratorFacade.cs" />
-    <Compile Include="Facade\GeneratorUtils.cs" />
+    <Compile Include="Generator\Generator.cs" />
     <Compile Include="Factories\AbstractFactory.cs" />
     <Compile Include="Factories\BreedingFactory.cs" />
     <Compile Include="Factories\CityFactory.cs" />
@@ -62,7 +61,7 @@
     <Compile Include="Interfaces\IBreeder.cs" />
     <Compile Include="Interfaces\IBreedingFactory.cs" />
     <Compile Include="Interfaces\ICityFactory.cs" />
-    <Compile Include="Interfaces\IGeneratorUtils.cs" />
+    <Compile Include="Interfaces\IGenerator.cs" />
     <Compile Include="Interfaces\IMutater.cs" />
     <Compile Include="Interfaces\IRouletteWheel.cs" />
     <Compile Include="Interfaces\ISolutionFactory.cs" />

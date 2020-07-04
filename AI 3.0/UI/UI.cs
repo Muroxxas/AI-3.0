@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AI_3._0.Facade;
+using AI_3._0.Data_Classes;
 namespace AI_3._0.UI
 {
     class Ui
@@ -53,6 +54,12 @@ namespace AI_3._0.UI
                 }
             }
             generator.Generate(population, generations, cityCount, mutationRate, seed);
+            Solution bestFit = generator.GetBestFit();
+            Console.WriteLine($"The best solution, after {generations} generations, is thus");
+            Console.WriteLine($"PATH     : {bestFit.path}");
+            Console.WriteLine($"DISTANCE : {bestFit.distance}");
+            Console.WriteLine($"ID       : {bestFit.id}");
+            Console.ReadLine();
         }
         
 

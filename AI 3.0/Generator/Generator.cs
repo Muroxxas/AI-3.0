@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AI_3._0.Interfaces;
-using AI_3._0.Breeding;
 using AI_3._0.Factories;
 using AI_3._0.Data_Classes;
+using AI_3._0.Fitness;
 namespace AI_3._0.Facade
 {
-    class GeneratorUtils : IGeneratorUtils
+    class Generator : IGenerator
     {
         IAbstractFactory abstractFactory;
         ICityFactory cityFactory;
@@ -17,6 +17,7 @@ namespace AI_3._0.Facade
         IBreedingFactory breedingFactory;
 
         IBreeder breeder;
+        IBestFit bestFit;
         int population;
         int cityCount;
         int generations;
@@ -90,7 +91,6 @@ namespace AI_3._0.Facade
 
             this.generation = initialGeneration;
         }
-
         public void Generate()
         {
 
@@ -103,14 +103,19 @@ namespace AI_3._0.Facade
 
             for (int i =0; i < population; i++)
             {
-                
                 newGeneration[i] = breeder.Breed();
             }
             generation = newGeneration;
 
         }
 
-        public GeneratorUtils(int population, int cityCount, int generations, double mutationRate, int seed)
+        public Solution FindBestFit()
+        {
+            return bestFit.FindBestFit(generation);
+        }
+
+
+        public Generator(int population, int cityCount, int generations, double mutationRate, int seed)
         {
             this.population = population;
             this.cityCount = cityCount;
@@ -125,6 +130,7 @@ namespace AI_3._0.Facade
 
             IMutater mutater = breedingFactory.CreateMutater(mutationRate);
             this.solutionFactory = solutionFactory;
+            this.bestFit = new BestFit();
 
             this.breeder = breedingFactory.CreateBreeder( mutater, solutionFactory);
             

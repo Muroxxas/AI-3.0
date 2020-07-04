@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AI_3._0.Interfaces;
 using AI_3._0.Data_Classes;
-namespace AI_3._0.BestFit
+namespace AI_3._0.Fitness
 {
     class BestFit : IBestFit
     {
         FitnessObject[] bestFitArray;
-        IComparer<FitnessObject> sortByDifference;
 
         public Solution FindBestFit(Solution[] generation)
         {
@@ -19,12 +18,11 @@ namespace AI_3._0.BestFit
             //set up ends of the bestFitArray, to avoid overflowing.
             int firstFitness = generation.First().score;
             bestFitArray[0] = new FitnessObject(0, firstFitness);
-
            int lastFitness = generation.Last().score - generation[generation.Count() - 2].score;
             bestFitArray[generation.Count()-1] = new FitnessObject(generation.Length - 1, lastFitness);
 
             FillBestFitArray(generation);
-            Array.Sort(bestFitArray,sortByDifference);
+            Array.Sort(bestFitArray);
 
             int slotOfBestFitObject = bestFitArray.Last().generationSlot;
             return generation[slotOfBestFitObject];
@@ -41,8 +39,6 @@ namespace AI_3._0.BestFit
 
         }
 
-        public BestFit() {
-
-        }
+        public BestFit() {}
     }
 }

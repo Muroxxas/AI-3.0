@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using AI_3._0.Data_Classes;
 namespace AI_3._0.Interfaces
 {
-    interface IGeneratorUtils
+    interface IGenerator
     {
         void CreateCities();
-
         void CreateInitialGeneration();
-
         void Generate();
 
+        Solution FindBestFit();
 
     }
 }
