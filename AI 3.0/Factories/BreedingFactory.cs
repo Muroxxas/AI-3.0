@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AI_3._0.Interfaces;
 using AI_3._0.Breeding;
 using AI_3._0.Data_Classes;
+using AI_3._0.Testing;
 namespace AI_3._0.Factories
 {
     class BreedingFactory : IBreedingFactory
@@ -21,7 +22,7 @@ namespace AI_3._0.Factories
         }
         public IRouletteWheel CreateRouletteWheel(Solution[] generation)
         {
-            return new RouletteWheel(generation);
+            return new TestingRouletteWheel(generation);
         }
         public ISolutionUtils CreateSolutionUtils(City[] cities)
         {

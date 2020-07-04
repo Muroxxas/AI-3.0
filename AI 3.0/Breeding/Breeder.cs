@@ -50,7 +50,6 @@ namespace AI_3._0.Breeding
         private Solution Crossover(Solution Parent1, Solution Parent2)
         {
             string[] childSolution = new string[Parent1.path.Length];
-            Random rand = new Random();
             int crossoverPoint = rand.Next(0, Parent1.path.Length);
 
             //up to the crossover point

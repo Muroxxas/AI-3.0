@@ -79,10 +79,10 @@ namespace AI_3._0.Breeding
             string firstCityVisited = path.First();
             string lastCityVisited = path.Last();
 
-            //If ends dont match, punish.
+            //If ends dont match, punish severely.
             if (firstCityVisited != lastCityVisited)
             {
-                slice = slice * .7;
+                slice =  slice *.3;
             }
 
             //Loop through and search for duplicates.
@@ -95,6 +95,7 @@ namespace AI_3._0.Breeding
                 if (cityAlreadyVisited[cityInt] == false)
                 {
                     cityAlreadyVisited[cityInt] = true;
+                    slice = slice / .7;
                 }
 
                 //city HAS appeared before.
@@ -107,6 +108,7 @@ namespace AI_3._0.Breeding
                         if (slot == path.Length - 1)
                         {
                             //We're currently pointed at the final location in the solution object. Therefore, path.Last == path.First, as intended. Not a dupe.
+                            slice = slice / .3;
                         }
                         else
                         {

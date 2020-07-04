@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Testing\TestingRouletteWheel.cs" />
     <Compile Include="Testing\TestingSolutionUtils.cs" />
     <Compile Include="Fitness\BestFit.cs" />
     <Compile Include="Breeding\Breeder.cs" />

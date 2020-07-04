@@ -11,37 +11,56 @@ namespace AI_3._0.Breeding
     {
         double mutationRate;
         Random rand;
+
+        // Mutate using the Reverse Sequence Mutation methodology.
         public void Mutate(Solution solution)
         {
             if (rand.NextDouble() <= mutationRate)
             {
                 Console.WriteLine("Rolled to mutate!");
-                int mutatePoint1 = rand.Next(0,solution.path.Length);
-                int mutatePoint2 = rand.Next(1, solution.path.Length + 1);
-                string[] mutatedPath = new string[solution.path.Length];
-                string[] reversedPath = solution.path;
-                reversedPath.Reverse();
+                int m1 = rand.Next(0,solution.path.Length-1);
+                int m2 = rand.Next(m1 + 1, solution.path.Length);
 
-                for (int iterator =0; iterator < mutatePoint1; iterator++)
+                string[] unmutatedPath = solution.path;
+                string[] mutatedPath = new string[solution.path.Length];
+                string[] reversedChunk = CreateReversedChunk(unmutatedPath, m1, m2);
+
+               
+
+                for (int i =0; i < m1; i++)
                 {
                     //Fill normally.
-                    mutatedPath[iterator] = solution.path[iterator];
+                    mutatedPath[i] = unmutatedPath[i];
 
                 }
-                for (int iterator = mutatePoint1; iterator < mutatePoint2; iterator++)
+                int revSlot = 0;
+                for (int i = m1; i <= m2; i++)
                 {
-                    //fill in reverse.
-                    mutatedPath[iterator] = reversedPath[iterator];
+                    //fill with reversed chunk.
+                    mutatedPath[i] = reversedChunk[revSlot];
+                    revSlot++;
                 }
-                for (int iterator = mutatePoint2; iterator < solution.path.Length; iterator++) 
+                for (int i = m2+1; i < unmutatedPath.Length; i++) 
                 {
                     //fill normally.
-                    mutatedPath[iterator] = solution.path[iterator];
+                    mutatedPath[i] = solution.path[i];
                 }
                 solution.path = mutatedPath;
             }
         }
 
+        private string[] CreateReversedChunk ( string[] unmutatedPath, int m1, int m2)
+        {
+            string[] reversedChunk = new string[(m2 - m1) + 1];
+            int reversedSlot = 0;
+            for (int i=m1; i<=m2; i++)
+            {
+                reversedChunk[reversedSlot] = unmutatedPath[i];
+                reversedSlot++;
+            }
+            Array.Reverse(reversedChunk);
+            return reversedChunk;
+        }
         public Mutater() { }
         public Mutater(double mutationRate)
         {
