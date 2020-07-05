@@ -10,5 +10,7 @@ namespace AI_3._0.Interfaces
     {
 
         void CalcFitness(Solution[] generation);
+        double GetTotalDistance(Solution[] generation);
+        double GetSlice(Solution solution, double totalDistance);
     }
 }

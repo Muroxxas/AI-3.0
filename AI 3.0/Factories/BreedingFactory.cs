@@ -20,9 +20,9 @@ namespace AI_3._0.Factories
         {
             return new Mutater(mutationRate);
         }
-        public IRouletteWheel CreateRouletteWheel(Solution[] generation)
+        public IRouletteWheel CreateRouletteWheel(Solution[] generation, ISolutionUtils solutionUtils)
         {
-            return new TestingRouletteWheel(generation);
+            return new TestingRouletteWheel(generation, solutionUtils);
         }
         public ISolutionUtils CreateSolutionUtils(City[] cities)
         {
