@@ -17,7 +17,7 @@ namespace AI_3._0.Testing
             double selection = GetRandomDouble(0, generation.Last().score);
             if (selection >= generation.Last().score)
             {
-                //BUG
+                //BUG - the final object of the generation can never be selected as a parent.
                 return generation.Last();
             }
             else if (selection < generation.First().score)
