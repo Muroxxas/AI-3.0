@@ -9,19 +9,15 @@ namespace AI_3._0.Testing
 {
     class TestingRouletteWheel : IRouletteWheel
     {
-        ISolutionUtils solutionUtils;
-
         Solution[] generation;
         Random rand;
-        double totalDistance;
 
         public Solution SelectParent()
         {
-
             double selection = GetRandomDouble(0, generation.Last().score);
             if (selection >= generation.Last().score)
             {
-                //BUG. Generation.Last is never selected!
+                //BUG
                 return generation.Last();
             }
             else if (selection < generation.First().score)
@@ -69,22 +65,15 @@ namespace AI_3._0.Testing
             double i = rand.NextDouble() * (maximum - minimum) + minimum;
             return i;
         }
-        private double SelectionMax()
-        {
-            double max = generation.Last().score + solutionUtils.GetSlice(generation.Last(), totalDistance);
-            return max;
-        }
+
         public void SetRand(Random rand)
         {
             this.rand = rand;
         }
 
-        public TestingRouletteWheel(Solution[] generation, ISolutionUtils solutionUtils)
+        public TestingRouletteWheel(Solution[] generation)
         {
             this.generation = generation;
-            this.solutionUtils = solutionUtils;
-            this.totalDistance = solutionUtils.GetTotalDistance(generation);
-
         }
 
     }

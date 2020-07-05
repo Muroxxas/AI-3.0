@@ -17,14 +17,6 @@ namespace AI_3._0.Breeding
            double totalDistance = CalcTotalDistance(generation);
            double totalScore = CalcTotalScore(generation,totalDistance); 
         }
-        public double GetTotalDistance(Solution[] generation)
-        {
-            return CalcTotalDistance(generation);
-        }
-        public double GetSlice(Solution solution, double totalDistance)
-        {
-            return CalcSlice(solution, totalDistance);
-        }
 
         private double CalcTotalDistance(Solution[] generation)
         {
@@ -72,7 +64,7 @@ namespace AI_3._0.Breeding
             }
             return scoreRunningTotal;
         }
-        public double CalcScore(Solution solution, double scoreRunningTotal, double totalDistance)
+        private double CalcScore(Solution solution, double scoreRunningTotal, double totalDistance)
         {
             double score = scoreRunningTotal + CalcSlice(solution, totalDistance);
             solution.score = score;

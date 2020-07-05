@@ -15,7 +15,6 @@ namespace AI_3._0.Facade
         ICityFactory cityFactory;
         ISolutionFactory solutionFactory;
         IBreedingFactory breedingFactory;
-        ISolutionUtils solutionUtils;
 
         IBreeder breeder;
         IBestFit bestFit;
@@ -55,14 +54,39 @@ namespace AI_3._0.Facade
         }
         public void CreateInitialGeneration()
         {
-            InitialGenerationSetup();
+            CreateCities();
+            breeder.SetSolutionUtils( breedingFactory.CreateSolutionUtils(cities) );
 
             Solution[] initialGeneration = new Solution[population];
+            StringBuilder sb = new StringBuilder();
             Random rand = new Random();
+            string[] path = new string[population + 1];
 
+
+            //Create object
             for (int i =0; i < population; i++)
             {
-                initialGeneration[i] = CreateRandomSolution(rand);
+                path = new string[cityCount + 1];
+                // create path string
+                for (int location =0; location <= cityCount; location++)
+                {
+                    int cityVisited = rand.Next(0, cityCount);
+                    if (cityVisited < 10)
+                    {
+                        sb.Append($"0{cityVisited.ToString()}");
+                        path[location]= sb.ToString();
+                        sb.Clear();
+                    }
+                    else {
+                        sb.Append(cityVisited.ToString());
+                        path[location] = sb.ToString();
+                        sb.Clear();
+                    }
+
+                    
+                }
+                Solution solutionObj = solutionFactory.CreateSolution(path);
+                initialGeneration[i] = solutionObj;
             }
 
             this.generation = initialGeneration;
@@ -70,7 +94,9 @@ namespace AI_3._0.Facade
         public void Generate()
         {
 
-            SuccessiveGenerationSetup();
+            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation);
+            breeder.SetRouletteWheel(rouletteWheel);
+            breeder.CalcFitness(generation);
 
             Solution[] newGeneration = new Solution[population];
 
@@ -95,50 +121,6 @@ namespace AI_3._0.Facade
         }
 
 
-        private void InitialGenerationSetup()
-        {
-            CreateCities();
-            solutionUtils = breedingFactory.CreateSolutionUtils(cities);
-            breeder.SetSolutionUtils(solutionUtils);
-
-        }
-        private void SuccessiveGenerationSetup()
-        {
-            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation, solutionUtils);
-            breeder.SetRouletteWheel(rouletteWheel);
-            breeder.CalcFitness(generation);
-        }
-
-
-        private string[] CreateRandomPath(Random rand)
-        {
-            string[] path = new string[population + 1];
-
-            StringBuilder sb = new StringBuilder();
-            for (int location = 0; location <= cityCount; location++)
-            {
-                int cityVisited = rand.Next(0, cityCount);
-                if (cityVisited < 10)
-                {
-                    sb.Append($"0{cityVisited.ToString()}");
-                    path[location] = sb.ToString();
-                    sb.Clear();
-                }
-                else
-                {
-                    sb.Append(cityVisited.ToString());
-                    path[location] = sb.ToString();
-                    sb.Clear();
-                }
-            }
-
-            return path;
-        }
-        private Solution CreateRandomSolution (Random rand)
-        {
-            string[] path = CreateRandomPath(rand);
-            return solutionFactory.CreateSolution(path);
-        }
         public Generator(int population, int cityCount, int generations, double mutationRate, int seed)
         {
             this.population = population;
