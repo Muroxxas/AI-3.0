@@ -61,11 +61,21 @@ namespace AI_3._0.Breeding
             Array.Reverse(reversedChunk);
             return reversedChunk;
         }
-        public Mutater() { }
+
         public Mutater(double mutationRate)
         {
             this.mutationRate = mutationRate;
             this.rand = new Random();
+        }
+        public Mutater(double mutationRate, int seed)
+        {
+            this.mutationRate = mutationRate;
+            this.rand = new Random(seed);
+        }
+        public Mutater(double mutationRate, Random rand)
+        {
+            this.mutationRate = mutationRate;
+            this.rand = rand;
         }
     }
 }

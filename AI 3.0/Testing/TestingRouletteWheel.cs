@@ -74,6 +74,17 @@ namespace AI_3._0.Testing
         public TestingRouletteWheel(Solution[] generation)
         {
             this.generation = generation;
+            this.rand = new Random();
+        }
+        public TestingRouletteWheel(Solution[] generation, int seed)
+        {
+            this.generation = generation;
+            this.rand = new Random(seed);
+        }
+        public TestingRouletteWheel(Solution[] generation, Random rand)
+        {
+            this.generation = generation;
+            this.rand = rand;
         }
 
     }

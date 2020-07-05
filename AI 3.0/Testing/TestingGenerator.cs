@@ -7,9 +7,9 @@ using AI_3._0.Interfaces;
 using AI_3._0.Factories;
 using AI_3._0.Data_Classes;
 using AI_3._0.Fitness;
-namespace AI_3._0.Facade
+namespace AI_3._0.Testing
 {
-    class Generator : IGenerator
+    class TestingGenerator : IGenerator
     {
         IAbstractFactory abstractFactory;
         ICityFactory cityFactory;
@@ -23,24 +23,27 @@ namespace AI_3._0.Facade
         int generations;
         double mutationRate;
         int seed;
+        Random rand;
 
         City[] cities;
         Solution[] generation;
 
-        public void CreateCities() {
+        public void CreateCities()
+        {
 
             City[] cities = new City[cityCount];
             StringBuilder sb = new StringBuilder(2);
 
-            for (int city =0; city < cityCount; city++)
+            for (int city = 0; city < cityCount; city++)
             {
                 if (city < 10)
                 {
-                    sb.Append( $"0{city.ToString()}") ;
+                    sb.Append($"0{city.ToString()}");
                     City newCity = cityFactory.CreateCity(sb.ToString());
                     cities[city] = newCity;
                     sb.Clear();
-                } else
+                }
+                else
                 {
                     sb.Append(city.ToString());
                     City newCity = cityFactory.CreateCity(sb.ToString());
@@ -50,20 +53,18 @@ namespace AI_3._0.Facade
                 }
             }
             this.cities = cities;
-            
+
         }
         public void CreateInitialGeneration()
         {
             CreateCities();
-            breeder.SetSolutionUtils( breedingFactory.CreateSolutionUtils(cities) );
+            breeder.SetSolutionUtils(breedingFactory.CreateSolutionUtils(cities));
 
             Solution[] initialGeneration = new Solution[population];
             StringBuilder sb = new StringBuilder();
-            Random rand = new Random(seed);
-
 
             //Create object
-            for (int i =0; i < population; i++)
+            for (int i = 0; i < population; i++)
             {
                 Solution solutionObj = CreateRandomSolution(rand);
                 initialGeneration[i] = solutionObj;
@@ -74,16 +75,16 @@ namespace AI_3._0.Facade
         public void Generate()
         {
 
-            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation);
+            IRouletteWheel rouletteWheel = breedingFactory.CreateRouletteWheel(generation, rand);
             breeder.SetRouletteWheel(rouletteWheel);
             breeder.CalcFitness(generation);
 
             Solution[] newGeneration = new Solution[population];
 
 
-            for (int i =0; i < population; i++)
+            for (int i = 0; i < population; i++)
             {
-                
+
                 newGeneration[i] = breeder.Breed();
 
             }
@@ -128,25 +129,26 @@ namespace AI_3._0.Facade
             return path;
         }
 
-        public Generator(int population, int cityCount, int generations, double mutationRate, int seed)
+        public TestingGenerator(int population, int cityCount, int generations, double mutationRate, int seed)
         {
             this.population = population;
             this.cityCount = cityCount;
             this.generations = generations;
             this.mutationRate = mutationRate;
             this.seed = seed;
+            this.rand = new Random(seed);
 
             this.abstractFactory = new AbstractFactory();
-            this.cityFactory = abstractFactory.CreateCityFactory(this.seed);
-            this.breedingFactory= abstractFactory.CreateBreedingFactory();
+            this.cityFactory = abstractFactory.CreateCityFactory(rand);
+            this.breedingFactory = abstractFactory.CreateBreedingFactory();
             ISolutionFactory solutionFactory = abstractFactory.CreateSolutionFactory();
 
-            IMutater mutater = breedingFactory.CreateMutater(mutationRate);
+            IMutater mutater = breedingFactory.CreateMutater(mutationRate, rand);
             this.solutionFactory = solutionFactory;
             this.bestFit = new BestFit();
 
-            this.breeder = breedingFactory.CreateBreeder( mutater, solutionFactory);
-            
+            this.breeder = breedingFactory.CreateBreeder(mutater, solutionFactory, rand);
+
         }
 
     }

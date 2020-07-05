@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AI_3._0.Facade;
+using AI_3._0.Interfaces;
 using AI_3._0.Data_Classes;
+using AI_3._0.Testing;
 namespace AI_3._0.UI
 {
     class Ui
     {
-        GeneratorFacade generator = new GeneratorFacade();
+        IFacade generator = new TestingFacade();
 
         int population;
         int cityCount;

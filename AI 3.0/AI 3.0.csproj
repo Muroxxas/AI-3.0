@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IFacade.cs" />
+    <Compile Include="Testing\TestingFacade.cs" />
+    <Compile Include="Testing\TestingGenerator.cs" />
     <Compile Include="Testing\TestingRouletteWheel.cs" />
     <Compile Include="Testing\TestingSolutionUtils.cs" />
     <Compile Include="Fitness\BestFit.cs" />

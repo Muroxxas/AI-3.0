@@ -15,7 +15,10 @@ namespace AI_3._0.Factories
 
             return new CityFactory(seed);
         }
-
+        public ICityFactory CreateCityFactory(Random rand)
+        {
+            return new CityFactory(rand);
+        }
         public ISolutionFactory CreateSolutionFactory()
         {
             return new SolutionFactory();

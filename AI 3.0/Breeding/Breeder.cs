@@ -44,7 +44,7 @@ namespace AI_3._0.Breeding
         public void SetRouletteWheel(IRouletteWheel rouletteWheel)
         {
             this.rouletteWheel = rouletteWheel;
-            this.rouletteWheel.SetRand(new Random());
+            this.rouletteWheel.SetRand(rand);
         }
 
         private Solution Crossover(Solution Parent1, Solution Parent2)
@@ -67,11 +67,24 @@ namespace AI_3._0.Breeding
             return child;
         }
 
-        public Breeder(IMutater mutater, ISolutionFactory solutionFactory )
+
+        public Breeder (IMutater mutater, ISolutionFactory solutionFactory)
         {
             this.mutater = mutater;
             this.solutionFactory = solutionFactory;
             this.rand = new Random();
+        }
+        public Breeder(IMutater mutater, ISolutionFactory solutionFactory, int seed )
+        {
+            this.mutater = mutater;
+            this.solutionFactory = solutionFactory;
+            this.rand = new Random(seed);
+        }
+        public Breeder(IMutater mutater, ISolutionFactory solutionFactory, Random rand)
+        {
+            this.mutater = mutater;
+            this.solutionFactory = solutionFactory;
+            this.rand = rand;
         }
     }
 }

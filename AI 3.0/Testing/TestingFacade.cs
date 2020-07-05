@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 using AI_3._0.Facade;
 using AI_3._0.Data_Classes;
 using AI_3._0.Interfaces;
-namespace AI_3._0.Facade
+namespace AI_3._0.Testing
 {
-    class GeneratorFacade : IFacade
+    class TestingFacade : IFacade
     {
 
-        Generator generator;
+        IGenerator generator;
 
         public void Generate(int population, int generations, int cityCount, double mutationRate, int seed)
         {
-            generator = new Generator(population, cityCount, generations, mutationRate, seed);
+            generator = new TestingGenerator(population, cityCount, generations, mutationRate, seed);
 
             generator.CreateInitialGeneration();
 
-            for(int i=1; i <= generations; i++)
+            for (int i = 1; i <= generations; i++)
             {
                 Console.WriteLine($"Generation {i} created!");
                 generator.Generate();
@@ -34,7 +34,7 @@ namespace AI_3._0.Facade
             return generator.FindBestFit();
         }
 
-        public GeneratorFacade() { }
-        
+        public TestingFacade() { }
+
     }
 }
