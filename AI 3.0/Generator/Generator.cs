@@ -7,6 +7,10 @@ using AI_3._0.Interfaces;
 using AI_3._0.Factories;
 using AI_3._0.Data_Classes;
 using AI_3._0.Fitness;
+using System.IO;
+using AI_3._0.Logging.LoggingInterfaces;
+using AI_3._0.Logging.Loggers;
+
 namespace AI_3._0.Facade
 {
     class Generator : IGenerator
@@ -24,8 +28,12 @@ namespace AI_3._0.Facade
         double mutationRate;
         int seed;
 
+
         City[] cities;
         Solution[] generation;
+
+        StreamWriter writer;
+        IGeneratorLogger logger;
 
         public void CreateCities() {
 
@@ -107,6 +115,7 @@ namespace AI_3._0.Facade
                 newGeneration[i] = breeder.Breed();
 
             }
+            logger.logBestFitSolution(writer, FindBestFit());
             generation = newGeneration;
 
         }
@@ -115,14 +124,22 @@ namespace AI_3._0.Facade
             //used for setting the fitness of the final generation, after the facade's generation loop finishes.
             breeder.CalcFitness(generation);
         }
+
+        //Finds and returns the solution object with the highest fitness in a given solution.
         public Solution FindBestFit()
         {
             return bestFit.FindBestFit(generation);
         }
 
-
+        public void SetWriter(StreamWriter writer)
+        {
+            this.writer = writer;
+        } 
         public Generator(int population, int cityCount, int generations, double mutationRate, int seed)
         {
+
+            this.logger = new GeneratorLogger();
+
             this.population = population;
             this.cityCount = cityCount;
             this.generations = generations;
@@ -141,6 +158,7 @@ namespace AI_3._0.Facade
             this.breeder = breedingFactory.CreateBreeder( mutater, solutionFactory);
             
         }
+
 
     }
 }

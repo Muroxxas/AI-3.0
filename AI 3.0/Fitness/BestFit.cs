@@ -12,8 +12,10 @@ namespace AI_3._0.Fitness
     {
         FitnessObject[] bestFitArray;
 
+        //Finds and returns the solution with the highest fitness in a given generation.
         public Solution FindBestFit(Solution[] generation)
         {
+            //create array of fitness objects
             bestFitArray = new FitnessObject[generation.Length];
 
             //set up ends of the bestFitArray, to avoid overflowing.
@@ -22,9 +24,12 @@ namespace AI_3._0.Fitness
            int lastFitness = generation.Last().score - generation[generation.Count() - 2].score;
             bestFitArray[generation.Count()-1] = new FitnessObject(generation.Length - 1, lastFitness);
 
+            //Fill the BestFitArray, then sort it by each item's fitness score.
             FillBestFitArray(generation);
             IEnumerable<FitnessObject> bestFitSorted = bestFitArray.OrderBy(item => item.fitness);
 
+
+            //Use the BestFitArray to determine which solution in the generation is the best fit. Then, return that solution.
             int slotOfBestFitObject = bestFitSorted.Last().generationSlot;
             return generation[slotOfBestFitObject];
 

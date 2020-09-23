@@ -62,10 +62,14 @@
     <Compile Include="Interfaces\IBreedingFactory.cs" />
     <Compile Include="Interfaces\ICityFactory.cs" />
     <Compile Include="Interfaces\IGenerator.cs" />
+    <Compile Include="Logging\Loggers\GeneratorLogger.cs" />
+    <Compile Include="Logging\LoggingInterfaces\IFacadeLogger.cs" />
     <Compile Include="Interfaces\IMutater.cs" />
     <Compile Include="Interfaces\IRouletteWheel.cs" />
     <Compile Include="Interfaces\ISolutionFactory.cs" />
     <Compile Include="Interfaces\ISolutionUtils.cs" />
+    <Compile Include="Logging\Loggers\FacadeLogger.cs" />
+    <Compile Include="Logging\LoggingInterfaces\IGeneratorLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Ui.cs" />
